@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
 import { MODALIDADES_NEGOCIACION, ROLES_ACTOR } from "@/lib/types";
 import type { Actor, Documento, Lote, Necesidad, Proyecto } from "@/lib/types";
-import { ACTORES_MOCK, LOTES_MOCK, type LoteMock } from "@/lib/mock-data";
+import { ACTORES_MOCK, CAPACIDADES_INTERVENCION, INTERVENCIONES_MOCK, LOTES_MOCK, type LoteMock } from "@/lib/mock-data";
 import { EtapaTimeline } from "@/components/etapa-timeline";
 import { formatCOP } from "@/lib/format";
 
@@ -141,6 +141,43 @@ export default async function LoteDetallePage({
                     </p>
                   )}
                 </div>
+
+                {INTERVENCIONES_MOCK.filter((iv) => iv.proyecto_id === proyecto.id).length > 0 && (
+                  <div className="flex flex-col gap-3">
+                    <h3 className="text-sm font-medium text-[var(--muted)]">
+                      Intervención
+                    </h3>
+                    <ul className="flex flex-col gap-3">
+                      {INTERVENCIONES_MOCK.filter((iv) => iv.proyecto_id === proyecto.id).map((iv) => {
+                        const integrador = ACTORES_MOCK.find((a) => a.id === iv.integrador_id);
+                        const capacidad = CAPACIDADES_INTERVENCION.find((c) => c.valor === iv.capacidad);
+                        return (
+                          <li
+                            key={iv.id}
+                            className="flex flex-col gap-2 rounded-xl border border-[var(--brand)] bg-[var(--brand)]/5 px-4 py-3 text-sm"
+                          >
+                            <div className="flex flex-wrap items-center gap-2">
+                              <span className="rounded-full bg-[var(--brand)] px-3 py-1 text-xs font-medium text-[var(--brand-foreground)]">
+                                {capacidad?.etiqueta ?? iv.capacidad}
+                              </span>
+                              {integrador && (
+                                <Link
+                                  href={`/actores/${integrador.id}`}
+                                  className="font-medium text-[var(--brand)] hover:underline"
+                                >
+                                  {integrador.nombre}
+                                </Link>
+                              )}
+                            </div>
+                            {iv.terminos && (
+                              <p className="text-[var(--muted)]">{iv.terminos}</p>
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                )}
               </div>
             );
           })}
@@ -225,7 +262,12 @@ export default async function LoteDetallePage({
               <h2 className="text-sm font-medium uppercase tracking-wide text-[var(--muted)]">
                 Propietario
               </h2>
-              <p className="mt-2 text-sm font-medium">{lote.propietario.nombre}</p>
+              <Link
+                href={`/actores/${lote.propietario.id}`}
+                className="mt-2 text-sm font-medium text-[var(--brand)] hover:underline"
+              >
+                {lote.propietario.nombre}
+              </Link>
             </div>
           )}
         </aside>

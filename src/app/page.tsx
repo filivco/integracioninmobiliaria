@@ -1,13 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ETAPAS } from "@/lib/types";
-import { LOTES_MOCK, NECESIDADES_MOCK } from "@/lib/mock-data";
+import { ACTORES_MOCK, LOTES_MOCK, NECESIDADES_MOCK } from "@/lib/mock-data";
 import { LoteCard } from "@/components/lote-card";
 import { NecesidadCard } from "@/components/necesidad-card";
+import { formatCOP } from "@/lib/format";
 
 export default function Home() {
   const destacados = LOTES_MOCK.slice(0, 3);
   const necesidadesDestacadas = NECESIDADES_MOCK.slice(0, 3);
+
+  const valorCartera = LOTES_MOCK.reduce((suma, l) => suma + (l.valor_lote ?? 0), 0);
+  const stats = [
+    { valor: LOTES_MOCK.length.toLocaleString("es-CO"), etiqueta: "Lotes activos" },
+    { valor: formatCOP(valorCartera), etiqueta: "Valor en cartera" },
+    { valor: NECESIDADES_MOCK.length.toLocaleString("es-CO"), etiqueta: "Necesidades abiertas" },
+    { valor: ACTORES_MOCK.length.toLocaleString("es-CO"), etiqueta: "Actores en la red" },
+  ];
 
   return (
     <div className="flex flex-col">
@@ -46,6 +55,17 @@ export default function Home() {
               Soy arquitecto, constructor, fiduciaria…
             </Link>
           </div>
+        </div>
+      </section>
+
+      <section className="border-b border-[var(--border)] py-10">
+        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 sm:grid-cols-4">
+          {stats.map((stat) => (
+            <div key={stat.etiqueta}>
+              <p className="text-2xl font-semibold tracking-tight sm:text-3xl">{stat.valor}</p>
+              <p className="mt-1 text-sm text-[var(--muted)]">{stat.etiqueta}</p>
+            </div>
+          ))}
         </div>
       </section>
 
