@@ -32,6 +32,8 @@ export type CapacidadIntervencion =
   | "capital"
   | "comercializacion";
 
+export type EstadoVerificacion = "verificado" | "en_revision" | "confidencial";
+
 export interface Organizacion {
   id: string;
   nombre: string;
@@ -43,6 +45,7 @@ export interface Actor {
   nombre: string;
   rol: RolActor;
   organizacion_id: string | null;
+  estado_verificacion: EstadoVerificacion;
   email: string | null;
   telefono: string | null;
   created_at: string;
@@ -134,6 +137,15 @@ export const ROLES_ACTOR: { valor: RolActor; etiqueta: string }[] = [
   { valor: "inversionista", etiqueta: "Inversionista" },
   { valor: "consultor", etiqueta: "Consultor" },
   { valor: "entidad_publica", etiqueta: "Entidad pública" },
+];
+
+export const ESTADOS_VERIFICACION: {
+  valor: EstadoVerificacion;
+  etiqueta: string;
+}[] = [
+  { valor: "verificado", etiqueta: "Propietario verificado" },
+  { valor: "en_revision", etiqueta: "Propietario en revisión" },
+  { valor: "confidencial", etiqueta: "Propietario confidencial" },
 ];
 
 export const MODALIDADES_NEGOCIACION: {

@@ -8,6 +8,7 @@ import type { Actor, Documento, Lote, Necesidad, Proyecto } from "@/lib/types";
 import { ACTORES_MOCK, CAPACIDADES_INTERVENCION, INTERVENCIONES_MOCK, LOTES_MOCK, construirHistorico, type LoteMock } from "@/lib/mock-data";
 import { EtapaTimeline } from "@/components/etapa-timeline";
 import { EventoTimeline } from "@/components/evento-timeline";
+import { VerificacionBadge } from "@/components/verificacion-badge";
 import { formatCOP } from "@/lib/format";
 
 type LoteDetalle = LoteMock & { propietario: Actor | null };
@@ -266,16 +267,21 @@ export default async function LoteDetallePage({
           </div>
 
           {lote.propietario && (
-            <div className="flex flex-col gap-1 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
+            <div className="flex flex-col gap-2 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
               <h2 className="text-sm font-medium uppercase tracking-wide text-[var(--muted)]">
                 Propietario
               </h2>
-              <Link
-                href={`/actores/${lote.propietario.id}`}
-                className="mt-2 text-sm font-medium text-[var(--brand)] hover:underline"
-              >
-                {lote.propietario.nombre}
-              </Link>
+              {lote.propietario.estado_verificacion === "confidencial" ? (
+                <p className="mt-2 text-sm font-medium">Propietario confidencial</p>
+              ) : (
+                <Link
+                  href={`/actores/${lote.propietario.id}`}
+                  className="mt-2 text-sm font-medium text-[var(--brand)] hover:underline"
+                >
+                  {lote.propietario.nombre}
+                </Link>
+              )}
+              <VerificacionBadge estado={lote.propietario.estado_verificacion} />
             </div>
           )}
         </aside>

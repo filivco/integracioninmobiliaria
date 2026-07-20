@@ -4,9 +4,14 @@ import type { Metadata } from "next";
 import { CAPACIDADES_INTERVENCION, ORGANIZACIONES_MOCK, ACTORES_MOCK, INTERVENCIONES_MOCK, LOTES_MOCK } from "@/lib/mock-data";
 import { ROLES_ACTOR } from "@/lib/types";
 import { LoteCard } from "@/components/lote-card";
+import { VerificacionBadge } from "@/components/verificacion-badge";
 
 function getActor(id: string) {
   return ACTORES_MOCK.find((a) => a.id === id) ?? null;
+}
+
+function esConfidencial(actor: { rol: string; estado_verificacion: string }) {
+  return actor.rol === "propietario" && actor.estado_verificacion === "confidencial";
 }
 
 export async function generateMetadata({
@@ -16,7 +21,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const actor = getActor(id);
-  return { title: actor ? `${actor.nombre} — IntegracionInmobiliaria.com` : "Actor no encontrado" };
+  const nombre = actor ? (esConfidencial(actor) ? "Propietario confidencial" : actor.nombre) : null;
+  return { title: nombre ? `${nombre} — IntegracionInmobiliaria.com` : "Actor no encontrado" };
 }
 
 export default async function ActorPerfilPage({
@@ -33,18 +39,24 @@ export default async function ActorPerfilPage({
   const organizacion = ORGANIZACIONES_MOCK.find((o) => o.id === actor.organizacion_id);
   const lotesPublicados = LOTES_MOCK.filter((l) => l.propietario_id === actor.id);
   const intervenciones = INTERVENCIONES_MOCK.filter((i) => i.integrador_id === actor.id);
+  const confidencial = esConfidencial(actor);
 
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-10 px-6 py-20">
       <div className="flex flex-col gap-3">
-        <h1 className="text-3xl font-semibold tracking-tight">{actor.nombre}</h1>
+        <h1 className="text-3xl font-semibold tracking-tight">
+          {confidencial ? "Propietario confidencial" : actor.nombre}
+        </h1>
         <div className="flex flex-wrap items-center gap-2 text-sm text-[var(--muted)]">
           {rol && (
             <span className="rounded-full bg-[var(--brand)] px-3 py-1 text-xs font-medium text-[var(--brand-foreground)]">
               {rol.etiqueta}
             </span>
           )}
-          {organizacion && <span>{organizacion.nombre}</span>}
+          {organizacion && !confidencial && <span>{organizacion.nombre}</span>}
+          {actor.rol === "propietario" && (
+            <VerificacionBadge estado={actor.estado_verificacion} />
+          )}
         </div>
       </div>
 
