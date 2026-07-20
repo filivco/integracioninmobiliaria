@@ -4,6 +4,7 @@
 import type {
   Actor,
   CapacidadIntervencion,
+  Documento,
   EtapaProyecto,
   Lote,
   ModalidadNegociacion,
@@ -13,6 +14,7 @@ import type {
 
 export type LoteMock = Lote & {
   imagenes: string[];
+  documentos: Documento[];
   proyectos: {
     id: string;
     etapa: EtapaProyecto;
@@ -42,6 +44,17 @@ function necesidad(
   };
 }
 
+function documento(id: string, loteId: string, nombre: string): Documento {
+  return {
+    id,
+    lote_id: loteId,
+    proyecto_id: null,
+    url: "#",
+    nombre,
+    created_at: "2026-04-05T00:00:00.000Z",
+  };
+}
+
 export const LOTES_MOCK: LoteMock[] = [
   {
     id: "m1",
@@ -54,6 +67,10 @@ export const LOTES_MOCK: LoteMock[] = [
     propietario_id: "a1",
     created_at: "2026-04-02T00:00:00.000Z",
     imagenes: [img("bocagrande-1"), img("bocagrande-2"), img("bocagrande-3")],
+    documentos: [
+      documento("d1", "m1", "Escritura pública"),
+      documento("d2", "m1", "Estudio de suelos"),
+    ],
     proyectos: [
       {
         id: "p1",
@@ -78,6 +95,7 @@ export const LOTES_MOCK: LoteMock[] = [
     propietario_id: "a2",
     created_at: "2026-04-10T00:00:00.000Z",
     imagenes: [img("rodadero-1"), img("rodadero-2")],
+    documentos: [],
     proyectos: [
       {
         id: "p2",
@@ -102,6 +120,7 @@ export const LOTES_MOCK: LoteMock[] = [
     propietario_id: "a3",
     created_at: "2026-03-18T00:00:00.000Z",
     imagenes: [img("puertocolombia-1"), img("puertocolombia-2"), img("puertocolombia-3")],
+    documentos: [],
     proyectos: [
       {
         id: "p3",
@@ -126,6 +145,7 @@ export const LOTES_MOCK: LoteMock[] = [
     propietario_id: "a4",
     created_at: "2026-02-25T00:00:00.000Z",
     imagenes: [img("manzanillo-1"), img("manzanillo-2")],
+    documentos: [documento("d3", "m4", "Licencia de uso de suelo")],
     proyectos: [
       {
         id: "p4",
@@ -150,6 +170,7 @@ export const LOTES_MOCK: LoteMock[] = [
     propietario_id: "a5",
     created_at: "2026-05-30T00:00:00.000Z",
     imagenes: [img("via40-1"), img("via40-2")],
+    documentos: [],
     proyectos: [
       {
         id: "p5",
@@ -173,6 +194,7 @@ export const LOTES_MOCK: LoteMock[] = [
     propietario_id: "a6",
     created_at: "2026-06-12T00:00:00.000Z",
     imagenes: [img("sanandres-1"), img("sanandres-2"), img("sanandres-3")],
+    documentos: [],
     proyectos: [
       {
         id: "p6",
@@ -209,6 +231,11 @@ export const NECESIDADES_MOCK: NecesidadConLote[] = LOTES_MOCK.flatMap((lote) =>
 
 export const ACTORES_MOCK: Actor[] = [
   { id: "a1", nombre: "María Fernanda Ospina", rol: "propietario", organizacion_id: null, email: null, telefono: null, created_at: "2026-04-02T00:00:00.000Z" },
+  { id: "a2", nombre: "Carlos Julio Barrios", rol: "propietario", organizacion_id: null, email: null, telefono: null, created_at: "2026-04-10T00:00:00.000Z" },
+  { id: "a3", nombre: "Inversiones Costa Azul S.A.S.", rol: "propietario", organizacion_id: null, email: null, telefono: null, created_at: "2026-03-18T00:00:00.000Z" },
+  { id: "a4", nombre: "Rodrigo Emilio Pacheco", rol: "propietario", organizacion_id: null, email: null, telefono: null, created_at: "2026-02-25T00:00:00.000Z" },
+  { id: "a5", nombre: "Lucía Esther Vanegas", rol: "propietario", organizacion_id: null, email: null, telefono: null, created_at: "2026-05-30T00:00:00.000Z" },
+  { id: "a6", nombre: "Jairo Andrés Robinson", rol: "propietario", organizacion_id: null, email: null, telefono: null, created_at: "2026-06-12T00:00:00.000Z" },
   { id: "a7", nombre: "Constructora del Litoral", rol: "constructor", organizacion_id: "o1", email: null, telefono: null, created_at: "2026-04-02T00:00:00.000Z" },
   { id: "a8", nombre: "Fiduciaria Caribe", rol: "fiduciaria", organizacion_id: "o2", email: null, telefono: null, created_at: "2026-04-02T00:00:00.000Z" },
   { id: "a9", nombre: "Estudio Arenas & Arquitectos", rol: "arquitecto", organizacion_id: "o3", email: null, telefono: null, created_at: "2026-04-02T00:00:00.000Z" },

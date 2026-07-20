@@ -24,6 +24,7 @@ async function getLotes(): Promise<LoteMock[]> {
     return (data as LoteConProyectos[]).map((lote) => ({
       ...lote,
       imagenes: ["/mock/generico.svg"],
+      documentos: [],
       proyectos: lote.proyectos.map((p) => ({ ...p, necesidades: [] })),
     }));
   } catch {
