@@ -24,21 +24,21 @@ export default function EtapasPage() {
         <h1 className="text-3xl font-semibold tracking-tight">
           Etapas del ciclo de vida
         </h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
+        <p className="text-[var(--muted)]">
           Todo proyecto avanza por estas etapas, desde que se capta el lote
           hasta que el proyecto entra en operación.
         </p>
       </div>
 
-      <ol className="flex flex-col gap-6 border-t border-black/10 pt-8 dark:border-white/10">
+      <ol className="flex flex-col gap-6 border-t border-[var(--border)] pt-8">
         {ETAPAS.map((etapa, i) => (
           <li key={etapa.valor} className="flex gap-4">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-black/10 text-sm dark:border-white/15">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--border)] text-sm">
               {i + 1}
             </span>
             <div>
               <p className="font-medium">{etapa.etiqueta}</p>
-              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+              <p className="mt-1 text-sm text-[var(--muted)]">
                 {DESCRIPCIONES[etapa.valor]}
               </p>
             </div>

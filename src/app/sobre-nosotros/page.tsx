@@ -10,7 +10,7 @@ export default function SobreNosotrosPage() {
       <h1 className="text-3xl font-semibold tracking-tight">
         Sobre nosotros
       </h1>
-      <p className="text-zinc-600 dark:text-zinc-400">
+      <p className="text-[var(--muted)]">
         IntegracionInmobiliaria.com nace para conectar lotes con las etapas y
         los actores que necesita un proyecto inmobiliario para avanzar.
         Creemos en calidad sobre cantidad: la tecnología da visibilidad de

@@ -77,9 +77,9 @@ export function PublicarLoteForm() {
 
   if (estado === "exito") {
     return (
-      <div className="rounded-2xl border border-black/10 bg-black/[.02] px-6 py-10 text-center dark:border-white/10 dark:bg-white/[.03]">
+      <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-6 py-10 text-center">
         <p className="text-lg font-medium">¡Lote publicado!</p>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-2 text-sm text-[var(--muted)]">
           Nuestro equipo revisará la información y se pondrá en contacto
           contigo para avanzar a la etapa de viabilidad.
         </p>
@@ -90,7 +90,7 @@ export function PublicarLoteForm() {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-10">
       <fieldset className="flex flex-col gap-6">
-        <legend className="text-sm font-medium uppercase tracking-wide text-zinc-500">
+        <legend className="text-sm font-medium uppercase tracking-wide text-[var(--muted)]">
           Datos del lote
         </legend>
 
@@ -101,7 +101,7 @@ export function PublicarLoteForm() {
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
             placeholder="Ej. Lote El Manantial"
-            className="rounded-lg border border-black/10 bg-transparent px-4 py-3 outline-none focus:border-foreground dark:border-white/15"
+            className="rounded-lg border border-[var(--border)] bg-transparent px-4 py-3 outline-none focus:border-[var(--brand)]"
           />
         </label>
 
@@ -111,7 +111,7 @@ export function PublicarLoteForm() {
             value={ubicacion}
             onChange={(e) => setUbicacion(e.target.value)}
             placeholder="Ciudad, departamento"
-            className="rounded-lg border border-black/10 bg-transparent px-4 py-3 outline-none focus:border-foreground dark:border-white/15"
+            className="rounded-lg border border-[var(--border)] bg-transparent px-4 py-3 outline-none focus:border-[var(--brand)]"
           />
         </label>
 
@@ -124,7 +124,7 @@ export function PublicarLoteForm() {
               value={areaM2}
               onChange={(e) => setAreaM2(e.target.value)}
               placeholder="Ej. 5000"
-              className="rounded-lg border border-black/10 bg-transparent px-4 py-3 outline-none focus:border-foreground dark:border-white/15"
+              className="rounded-lg border border-[var(--border)] bg-transparent px-4 py-3 outline-none focus:border-[var(--brand)]"
             />
           </label>
 
@@ -134,14 +134,14 @@ export function PublicarLoteForm() {
               value={estadoJuridico}
               onChange={(e) => setEstadoJuridico(e.target.value)}
               placeholder="Ej. Escriturado, sin gravámenes"
-              className="rounded-lg border border-black/10 bg-transparent px-4 py-3 outline-none focus:border-foreground dark:border-white/15"
+              className="rounded-lg border border-[var(--border)] bg-transparent px-4 py-3 outline-none focus:border-[var(--brand)]"
             />
           </label>
         </div>
       </fieldset>
 
       <fieldset className="flex flex-col gap-4">
-        <legend className="text-sm font-medium uppercase tracking-wide text-zinc-500">
+        <legend className="text-sm font-medium uppercase tracking-wide text-[var(--muted)]">
           Modalidad de negociación
         </legend>
 
@@ -156,8 +156,8 @@ export function PublicarLoteForm() {
                 aria-pressed={selected}
                 className={`flex flex-col items-start gap-2 rounded-2xl border-2 px-5 py-6 text-left transition-colors ${
                   selected
-                    ? "border-foreground bg-foreground text-background"
-                    : "border-black/10 hover:border-black/30 dark:border-white/15 dark:hover:border-white/40"
+                    ? "border-[var(--brand)] bg-[var(--brand)] text-[var(--brand-foreground)]"
+                    : "border-[var(--border)] hover:border-[var(--brand)]"
                 }`}
               >
                 <span className="text-base font-semibold uppercase tracking-wide">
@@ -165,9 +165,7 @@ export function PublicarLoteForm() {
                 </span>
                 <span
                   className={`text-sm leading-5 ${
-                    selected
-                      ? "text-background/80"
-                      : "text-zinc-600 dark:text-zinc-400"
+                    selected ? "opacity-80" : "text-[var(--muted)]"
                   }`}
                 >
                   {m.descripcion}
@@ -179,7 +177,7 @@ export function PublicarLoteForm() {
 
         <a
           href="#tutorial-modalidades"
-          className="flex w-fit items-center gap-2 text-sm text-zinc-600 underline underline-offset-4 hover:text-foreground dark:text-zinc-400"
+          className="flex w-fit items-center gap-2 text-sm text-[var(--muted)] underline underline-offset-4 hover:text-foreground"
         >
           ▶ Ver tutorial en video: cómo elegir tu modalidad
         </a>
@@ -194,7 +192,7 @@ export function PublicarLoteForm() {
       <button
         type="submit"
         disabled={estado === "enviando"}
-        className="flex h-12 w-full items-center justify-center rounded-full bg-foreground px-6 text-sm font-medium text-background transition-opacity hover:opacity-90 disabled:opacity-50 sm:w-fit"
+        className="flex h-12 w-full items-center justify-center rounded-full bg-[var(--brand)] px-6 text-sm font-medium text-[var(--brand-foreground)] transition-opacity hover:opacity-90 disabled:opacity-50 sm:w-fit"
       >
         {estado === "enviando" ? "Publicando..." : "Publicar lote"}
       </button>

@@ -12,17 +12,17 @@ export default function ActoresPage() {
         <h1 className="text-3xl font-semibold tracking-tight">
           Directorio de actores
         </h1>
-        <p className="text-zinc-600 dark:text-zinc-400">
+        <p className="text-[var(--muted)]">
           Un proyecto necesita distintos roles en distintas etapas. Estos son
           los actores que participan en la plataforma.
         </p>
       </div>
 
-      <ul className="grid gap-4 border-t border-black/10 pt-8 sm:grid-cols-2 dark:border-white/10">
+      <ul className="grid gap-4 border-t border-[var(--border)] pt-8 sm:grid-cols-2">
         {ROLES_ACTOR.map((rol) => (
           <li
             key={rol.valor}
-            className="rounded-xl border border-black/10 px-4 py-3 text-sm dark:border-white/15"
+            className="rounded-xl border border-[var(--border)] px-4 py-3 text-sm"
           >
             {rol.etiqueta}
           </li>

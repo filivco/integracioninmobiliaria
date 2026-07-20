@@ -7,8 +7,8 @@ const links = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-black/10 dark:border-white/10">
-      <div className="mx-auto flex max-w-5xl flex-col items-center gap-3 px-6 py-10 text-sm text-zinc-500 sm:flex-row sm:justify-between">
+    <footer className="border-t border-[var(--border)]">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-6 py-10 text-sm text-[var(--muted)] sm:flex-row sm:justify-between">
         <p>© {new Date().getFullYear()} IntegracionInmobiliaria.com</p>
         <div className="flex gap-6">
           {links.map((link) => (

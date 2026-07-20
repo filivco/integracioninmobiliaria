@@ -9,12 +9,17 @@ const links = [
 
 export function Nav() {
   return (
-    <header className="border-b border-black/10 dark:border-white/10">
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
-        <Link href="/" className="text-sm font-semibold tracking-tight">
-          IntegracionInmobiliaria<span className="text-zinc-400">.com</span>
+    <header className="sticky top-0 z-10 border-b border-[var(--border)] bg-[var(--background)]/85 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <Link href="/" className="flex items-center gap-2">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--brand)] text-sm font-bold text-[var(--brand-foreground)]">
+            II
+          </span>
+          <span className="text-sm font-semibold tracking-tight">
+            IntegracionInmobiliaria<span className="text-[var(--muted)]">.com</span>
+          </span>
         </Link>
-        <nav className="hidden gap-8 text-sm text-zinc-600 dark:text-zinc-400 sm:flex">
+        <nav className="hidden gap-8 text-sm text-[var(--muted)] sm:flex">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -27,7 +32,7 @@ export function Nav() {
         </nav>
         <Link
           href="/publicar-lote"
-          className="rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-opacity hover:opacity-90"
+          className="rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-medium text-[var(--brand-foreground)] transition-opacity hover:opacity-90"
         >
           Publicar lote
         </Link>
