@@ -5,8 +5,9 @@ import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
 import { MODALIDADES_NEGOCIACION, ROLES_ACTOR } from "@/lib/types";
 import type { Actor, Documento, Lote, Necesidad, Proyecto } from "@/lib/types";
-import { ACTORES_MOCK, CAPACIDADES_INTERVENCION, INTERVENCIONES_MOCK, LOTES_MOCK, type LoteMock } from "@/lib/mock-data";
+import { ACTORES_MOCK, CAPACIDADES_INTERVENCION, INTERVENCIONES_MOCK, LOTES_MOCK, construirHistorico, type LoteMock } from "@/lib/mock-data";
 import { EtapaTimeline } from "@/components/etapa-timeline";
+import { EventoTimeline } from "@/components/evento-timeline";
 import { formatCOP } from "@/lib/format";
 
 type LoteDetalle = LoteMock & { propietario: Actor | null };
@@ -214,6 +215,13 @@ export default async function LoteDetallePage({
                 </button>
               </div>
             )}
+          </div>
+
+          <div className="flex flex-col gap-4 border-t border-[var(--border)] pt-8">
+            <h2 className="text-sm font-medium uppercase tracking-wide text-[var(--muted)]">
+              Actividad
+            </h2>
+            <EventoTimeline eventos={construirHistorico(lote)} />
           </div>
 
           <Link

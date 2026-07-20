@@ -5,6 +5,7 @@ import type {
   Actor,
   CapacidadIntervencion,
   Documento,
+  Evento,
   EtapaProyecto,
   Intervencion,
   Lote,
@@ -13,6 +14,7 @@ import type {
   Organizacion,
   RolActor,
 } from "./types";
+import { ETAPAS, ROLES_ACTOR } from "./types";
 
 export type LoteMock = Lote & {
   imagenes: string[];
@@ -686,3 +688,122 @@ export const INTERVENCIONES_MOCK: Intervencion[] = [
     created_at: "2026-01-10T00:00:00.000Z",
   },
 ];
+
+// Comentarios internos de ejemplo, además de lo que ya se deriva de
+// lote/proyecto/necesidad/documento/intervención en construirHistorico().
+const COMENTARIOS_INTERNOS_MOCK: Record<string, { descripcion: string; created_at: string }[]> = {
+  m1: [
+    {
+      descripcion:
+        "El propietario confirmó disponibilidad para reunión con el constructor la próxima semana.",
+      created_at: "2026-05-20T00:00:00.000Z",
+    },
+  ],
+  m11: [
+    {
+      descripcion:
+        "Pendiente validar con el banco el apetito de riesgo para financiamiento portuario antes de cerrar el mandato.",
+      created_at: "2026-02-10T00:00:00.000Z",
+    },
+  ],
+  m19: [
+    {
+      descripcion:
+        "Se agenda visita técnica con el consultor de energía eólica para la próxima etapa de factibilidad.",
+      created_at: "2026-02-01T00:00:00.000Z",
+    },
+  ],
+};
+
+/**
+ * Deriva el histórico de un lote a partir de las entidades que ya
+ * existen (no se guarda por separado): publicación del lote, apertura
+ * de cada necesidad, carga de cada documento, formalización de cada
+ * intervención, más comentarios internos de ejemplo. Ordenado del más
+ * reciente al más antiguo.
+ */
+export function construirHistorico(lote: LoteMock): Evento[] {
+  const eventos: Evento[] = [];
+
+  eventos.push({
+    id: `ev-${lote.id}-publicacion`,
+    lote_id: lote.id,
+    proyecto_id: null,
+    actor_id: lote.propietario_id,
+    visibilidad: "publica",
+    descripcion: `Lote publicado en la plataforma${
+      lote.ubicacion ? ` — ${lote.ubicacion}` : ""
+    }.`,
+    created_at: lote.created_at,
+  });
+
+  for (const proyecto of lote.proyectos) {
+    const etapa = ETAPAS.find((e) => e.valor === proyecto.etapa)?.etiqueta ?? proyecto.etapa;
+    eventos.push({
+      id: `ev-${proyecto.id}-creacion`,
+      lote_id: lote.id,
+      proyecto_id: proyecto.id,
+      actor_id: null,
+      visibilidad: "publica",
+      descripcion: `Proyecto creado — etapa actual: ${etapa}.`,
+      created_at: lote.created_at,
+    });
+
+    for (const n of proyecto.necesidades) {
+      const rol = ROLES_ACTOR.find((r) => r.valor === n.tipo)?.etiqueta ?? n.tipo;
+      eventos.push({
+        id: `ev-${n.id}`,
+        lote_id: lote.id,
+        proyecto_id: proyecto.id,
+        actor_id: null,
+        visibilidad: "publica",
+        descripcion: `Se abrió necesidad de ${rol}${n.descripcion ? `: ${n.descripcion}` : ""}.`,
+        created_at: n.created_at,
+      });
+    }
+
+    for (const iv of INTERVENCIONES_MOCK.filter((i) => i.proyecto_id === proyecto.id)) {
+      const integrador = ACTORES_MOCK.find((a) => a.id === iv.integrador_id);
+      const capacidad = CAPACIDADES_INTERVENCION.find((c) => c.valor === iv.capacidad)?.etiqueta ?? iv.capacidad;
+      eventos.push({
+        id: `ev-${iv.id}`,
+        lote_id: lote.id,
+        proyecto_id: proyecto.id,
+        actor_id: iv.integrador_id,
+        visibilidad: "privada",
+        descripcion: `Se formalizó intervención de ${capacidad}${
+          integrador ? ` con ${integrador.nombre}` : ""
+        }.`,
+        created_at: iv.created_at,
+      });
+    }
+  }
+
+  for (const doc of lote.documentos) {
+    eventos.push({
+      id: `ev-${doc.id}`,
+      lote_id: lote.id,
+      proyecto_id: null,
+      actor_id: null,
+      visibilidad: "privada",
+      descripcion: `Se cargó el documento «${doc.nombre ?? "documento"}».`,
+      created_at: doc.created_at,
+    });
+  }
+
+  (COMENTARIOS_INTERNOS_MOCK[lote.id] ?? []).forEach((c, i) => {
+    eventos.push({
+      id: `ev-${lote.id}-comentario-${i}`,
+      lote_id: lote.id,
+      proyecto_id: lote.proyectos[0]?.id ?? null,
+      actor_id: null,
+      visibilidad: "privada",
+      descripcion: c.descripcion,
+      created_at: c.created_at,
+    });
+  });
+
+  return eventos.sort(
+    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+  );
+}

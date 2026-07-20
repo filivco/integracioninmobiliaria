@@ -98,6 +98,18 @@ export interface Intervencion {
   created_at: string;
 }
 
+export type VisibilidadEvento = "publica" | "privada";
+
+export interface Evento {
+  id: string;
+  lote_id: string;
+  proyecto_id: string | null;
+  actor_id: string | null;
+  visibilidad: VisibilidadEvento;
+  descripcion: string;
+  created_at: string;
+}
+
 export const ETAPAS: { valor: EtapaProyecto; etiqueta: string }[] = [
   { valor: "captacion", etiqueta: "Captación" },
   { valor: "viabilidad", etiqueta: "Viabilidad" },
