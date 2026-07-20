@@ -74,7 +74,7 @@ export interface Proyecto {
   created_at: string;
 }
 
-export interface Necesidad {
+export interface Oportunidad {
   id: string;
   proyecto_id: string;
   tipo: RolActor;

@@ -26,7 +26,7 @@ export default function ComoFuncionaPage() {
         <div>
           <p className="font-medium">Para actores del sector</p>
           <p className="mt-2 text-sm leading-6 text-[var(--muted)]">
-            Navegas el catálogo de proyectos y cubres las necesidades
+            Navegas el catálogo de proyectos y tomas las oportunidades
             puntuales que se abren en cada etapa: arquitectura, construcción,
             financiamiento, fiducia, comercialización, entre otras.
           </p>

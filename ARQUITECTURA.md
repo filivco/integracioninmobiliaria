@@ -15,9 +15,9 @@ La tecnología califica y da visibilidad de oportunidades; el negocio real ocurr
 | Entidad | Descripción |
 |---|---|
 | **Lote** | Entidad raíz. Nada existe aislado de un lote. Contiene ubicación, área, documentos, propietarios, fotografías, estado jurídico, restricciones, oportunidades, proyectos asociados. |
-| **Proyecto** | Un lote puede tener múltiples proyectos (intentos de desarrollo en el tiempo). Contiene etapa actual, aliados, necesidades, documentos, cronograma, estado, indicadores, modalidad de negociación. |
+| **Proyecto** | Un lote puede tener múltiples proyectos (intentos de desarrollo en el tiempo). Contiene etapa actual, aliados, oportunidades, documentos, cronograma, estado, indicadores, modalidad de negociación. |
 | **Etapa** | Ciclo de vida del proyecto: Captación → Viabilidad → Prefactibilidad → Factibilidad → Diseño → Licencia → Comercialización → Construcción → Operación. |
-| **Necesidad** | Algo puntual que el proyecto requiere (constructor, arquitecto, banco, fiduciaria, comercializador). Un proyecto puede tener varias necesidades abiertas a la vez. Distinta de Etapa: una necesidad puede repetirse en más de una etapa. |
+| **Oportunidad** | Algo puntual que el proyecto requiere (constructor, arquitecto, banco, fiduciaria, comercializador). Un proyecto puede tener varias oportunidades abiertas a la vez. Distinta de Etapa: una oportunidad puede repetirse en más de una etapa. |
 | **Actor** | Persona o empresa, puede asumir múltiples roles: Propietario, Integrador, Arquitecto, Constructor, Comercializador, Fiduciaria, Banco, Operador, Inversionista, Consultor, Entidad pública. |
 | **Organización** | Empresa a la que pertenece un Actor. |
 | **Documento** | Siempre pertenece a un Lote o Proyecto, nunca queda huérfano. |
@@ -35,14 +35,14 @@ Debajo de los tres botones: botón/link a tutorial en video explicando las tres 
 
 ## 4. Usuarios / roles
 
-- **Propietario**: postula lote, elige modalidad, ve estado de sus necesidades, recibe aplicaciones.
-- **Integrador** (negocio propio): puede tomar una Intervención/Mandato completa sobre un proyecto, no solo cubrir una necesidad puntual. Panel interno para detectar proyectos candidatos de alto valor.
-- **Actor externo** (Arquitecto, Constructor, Comercializador, Fiduciaria, Banco, Operador, Inversionista, Consultor, Entidad pública): navega y cubre Necesidades puntuales.
+- **Propietario**: postula lote, elige modalidad, ve estado de sus oportunidades, recibe aplicaciones.
+- **Integrador** (negocio propio): puede tomar una Intervención/Mandato completa sobre un proyecto, no solo cubrir una oportunidad puntual. Panel interno para detectar proyectos candidatos de alto valor.
+- **Actor externo** (Arquitecto, Constructor, Comercializador, Fiduciaria, Banco, Operador, Inversionista, Consultor, Entidad pública): navega y toma Oportunidades puntuales.
 - **Visitante anónimo**: navega catálogo público de lotes y etapas, sin aplicar.
 
 ## 5. Mecánica de la plataforma
 
-Propietario postula lote (con modalidad) → proyecto avanza por Etapas → en cada etapa se abren Necesidades → Actores externos cubren necesidades puntuales, o el Integrador toma una Intervención/Mandato sobre el proyecto completo. Matching automático / IA queda para V2 (roadmap del manifiesto).
+Propietario postula lote (con modalidad) → proyecto avanza por Etapas → en cada etapa se abren Oportunidades → Actores externos toman oportunidades puntuales, o el Integrador toma una Intervención/Mandato sobre el proyecto completo. Matching automático / IA queda para V2 (roadmap del manifiesto).
 
 ## 6. Sitemap propuesto
 
@@ -50,7 +50,7 @@ Propietario postula lote (con modalidad) → proyecto avanza por Etapas → en c
 |---|---|
 | `/` | Home — manifiesto, qué es (y qué no es) la plataforma |
 | `/lotes/` | Buscador/listado de lotes y proyectos, filtros por ubicación, etapa, modalidad, tamaño |
-| `/lotes/[slug]/` | Ficha de lote/proyecto: datos, etapa actual, necesidades abiertas, modalidad |
+| `/lotes/[slug]/` | Ficha de lote/proyecto: datos, etapa actual, oportunidades abiertas, modalidad |
 | `/publicar-lote/` | Postulación: datos del lote → botones SOLO VENTA / APORTE / MIXTO → botón tutorial en video → documentos |
 | `/etapas/` | Explicación de las etapas del ciclo de vida |
 | `/actores/` | Directorio de actores por rol |
@@ -106,7 +106,7 @@ create table actores (
   telefono text
 );
 
-create table necesidades (
+create table oportunidades (
   id uuid primary key default gen_random_uuid(),
   proyecto_id uuid not null references proyectos(id),
   tipo rol_actor not null,

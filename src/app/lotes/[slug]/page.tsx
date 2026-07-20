@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
 import { MODALIDADES_NEGOCIACION, ROLES_ACTOR } from "@/lib/types";
-import type { Actor, Documento, Lote, Necesidad, Proyecto } from "@/lib/types";
+import type { Actor, Documento, Lote, Oportunidad, Proyecto } from "@/lib/types";
 import { ACTORES_MOCK, CAPACIDADES_INTERVENCION, INTERVENCIONES_MOCK, LOTES_MOCK, construirHistorico, type LoteMock } from "@/lib/mock-data";
 import { EtapaTimeline } from "@/components/etapa-timeline";
 import { EventoTimeline } from "@/components/evento-timeline";
@@ -14,7 +14,7 @@ import { formatCOP } from "@/lib/format";
 type LoteDetalle = LoteMock & { propietario: Actor | null };
 
 type LoteDetalleDB = Lote & {
-  proyectos: (Proyecto & { necesidades: Necesidad[] })[];
+  proyectos: (Proyecto & { oportunidades: Oportunidad[] })[];
   documentos: Documento[];
   propietario: Actor | null;
 };
@@ -32,7 +32,7 @@ async function getLote(slug: string): Promise<LoteDetalle | null> {
     const supabase = await createClient();
     const { data, error } = await supabase
       .from("lotes")
-      .select("*, proyectos(*, necesidades(*)), documentos(*), propietario:actores!propietario_id(*)")
+      .select("*, proyectos(*, oportunidades(*)), documentos(*), propietario:actores!propietario_id(*)")
       .eq("slug", slug)
       .single();
 
@@ -119,27 +119,27 @@ export default async function LoteDetallePage({
 
                 <div className="flex flex-col gap-3">
                   <h3 className="text-sm font-medium text-[var(--muted)]">
-                    Necesidades abiertas
+                    Oportunidades abiertas
                   </h3>
-                  {proyecto.necesidades?.length ? (
+                  {proyecto.oportunidades?.length ? (
                     <ul className="flex flex-col gap-3">
-                      {proyecto.necesidades.map((n) => (
+                      {proyecto.oportunidades.map((op) => (
                         <li
-                          key={n.id}
+                          key={op.id}
                           className="rounded-xl border border-[var(--border)] px-4 py-3 text-sm"
                         >
                           <span className="font-medium">
-                            {ROLES_ACTOR.find((r) => r.valor === n.tipo)?.etiqueta ?? n.tipo}
+                            {ROLES_ACTOR.find((r) => r.valor === op.tipo)?.etiqueta ?? op.tipo}
                           </span>
-                          {n.descripcion && (
-                            <span className="text-[var(--muted)]"> — {n.descripcion}</span>
+                          {op.descripcion && (
+                            <span className="text-[var(--muted)]"> — {op.descripcion}</span>
                           )}
                         </li>
                       ))}
                     </ul>
                   ) : (
                     <p className="text-sm text-[var(--muted)]">
-                      No hay necesidades abiertas por ahora.
+                      No hay oportunidades abiertas por ahora.
                     </p>
                   )}
                 </div>

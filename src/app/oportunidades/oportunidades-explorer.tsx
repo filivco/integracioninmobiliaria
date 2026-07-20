@@ -2,24 +2,24 @@
 
 import { useMemo, useState } from "react";
 import { ROLES_ACTOR } from "@/lib/types";
-import type { NecesidadConLote } from "@/lib/mock-data";
-import { NecesidadCard } from "@/components/necesidad-card";
+import type { OportunidadConLote } from "@/lib/mock-data";
+import { OportunidadCard } from "@/components/oportunidad-card";
 
-export function NecesidadesExplorer({
-  necesidades,
+export function OportunidadesExplorer({
+  oportunidades,
 }: {
-  necesidades: NecesidadConLote[];
+  oportunidades: OportunidadConLote[];
 }) {
   const [busqueda, setBusqueda] = useState("");
   const [tipo, setTipo] = useState("");
 
   const filtradas = useMemo(() => {
     const q = busqueda.trim().toLowerCase();
-    return necesidades.filter((n) => {
-      if (tipo && n.tipo !== tipo) return false;
+    return oportunidades.filter((op) => {
+      if (tipo && op.tipo !== tipo) return false;
       if (
         q &&
-        !`${n.descripcion ?? ""} ${n.lote.nombre} ${n.lote.ubicacion ?? ""}`
+        !`${op.descripcion ?? ""} ${op.lote.nombre} ${op.lote.ubicacion ?? ""}`
           .toLowerCase()
           .includes(q)
       ) {
@@ -27,7 +27,7 @@ export function NecesidadesExplorer({
       }
       return true;
     });
-  }, [necesidades, busqueda, tipo]);
+  }, [oportunidades, busqueda, tipo]);
 
   return (
     <div className="flex flex-col gap-8">
@@ -54,20 +54,20 @@ export function NecesidadesExplorer({
 
       <p className="text-sm text-[var(--muted)]">
         {filtradas.length}{" "}
-        {filtradas.length === 1 ? "necesidad abierta" : "necesidades abiertas"}
+        {filtradas.length === 1 ? "oportunidad abierta" : "oportunidades abiertas"}
       </p>
 
       {filtradas.length === 0 ? (
         <div className="rounded-2xl border border-dashed border-[var(--border)] px-6 py-16 text-center">
           <p className="text-[var(--muted)]">
-            No hay necesidades que coincidan con esos filtros.
+            No hay oportunidades que coincidan con esos filtros.
           </p>
         </div>
       ) : (
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filtradas.map((n) => (
-            <li key={n.id}>
-              <NecesidadCard necesidad={n} />
+          {filtradas.map((op) => (
+            <li key={op.id}>
+              <OportunidadCard oportunidad={op} />
             </li>
           ))}
         </ul>

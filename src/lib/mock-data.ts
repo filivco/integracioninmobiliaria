@@ -10,7 +10,7 @@ import type {
   Intervencion,
   Lote,
   ModalidadNegociacion,
-  Necesidad,
+  Oportunidad,
   Organizacion,
   RolActor,
 } from "./types";
@@ -25,7 +25,7 @@ export type LoteMock = Lote & {
     modalidad_negociacion: ModalidadNegociacion;
     valor_potencial_ventas: number | null;
     estado: string | null;
-    necesidades: Necesidad[];
+    oportunidades: Oportunidad[];
   }[];
 };
 
@@ -33,12 +33,12 @@ function img(seed: string) {
   return `/mock/${seed}.svg`;
 }
 
-function necesidad(
+function oportunidad(
   id: string,
   proyecto_id: string,
   tipo: RolActor,
   descripcion: string,
-): Necesidad {
+): Oportunidad {
   return {
     id,
     proyecto_id,
@@ -84,9 +84,9 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "mixto",
         valor_potencial_ventas: 45000000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n1", "p1", "constructor", "Constructor para torre residencial de 22 pisos"),
-          necesidad("n2", "p1", "fiduciaria", "Estructuración de fiducia inmobiliaria"),
+        oportunidades: [
+          oportunidad("n1", "p1", "constructor", "Constructor para torre residencial de 22 pisos"),
+          oportunidad("n2", "p1", "fiduciaria", "Estructuración de fiducia inmobiliaria"),
         ],
       },
     ],
@@ -111,9 +111,9 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "aporte",
         valor_potencial_ventas: 8000000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n3", "p2", "arquitecto", "Diseño de proyecto hotelero boutique"),
-          necesidad("n4", "p2", "inversionista", "Ronda de capital semilla para diseño y licencia"),
+        oportunidades: [
+          oportunidad("n3", "p2", "arquitecto", "Diseño de proyecto hotelero boutique"),
+          oportunidad("n4", "p2", "inversionista", "Ronda de capital semilla para diseño y licencia"),
         ],
       },
     ],
@@ -138,9 +138,9 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "solo_venta",
         valor_potencial_ventas: 20000000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n5", "p3", "consultor", "Consultoría ambiental y de licenciamiento"),
-          necesidad("n10", "p3", "entidad_publica", "Concepto de autoridad ambiental regional"),
+        oportunidades: [
+          oportunidad("n5", "p3", "consultor", "Consultoría ambiental y de licenciamiento"),
+          oportunidad("n10", "p3", "entidad_publica", "Concepto de autoridad ambiental regional"),
         ],
       },
     ],
@@ -165,9 +165,9 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "mixto",
         valor_potencial_ventas: 18000000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n6", "p4", "comercializador", "Comercialización de bodegas logísticas"),
-          necesidad("n7", "p4", "banco", "Crédito constructor"),
+        oportunidades: [
+          oportunidad("n6", "p4", "comercializador", "Comercialización de bodegas logísticas"),
+          oportunidad("n7", "p4", "banco", "Crédito constructor"),
         ],
       },
     ],
@@ -192,8 +192,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "aporte",
         valor_potencial_ventas: 9500000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n8", "p5", "arquitecto", "Anteproyecto de vivienda de interés social"),
+        oportunidades: [
+          oportunidad("n8", "p5", "arquitecto", "Anteproyecto de vivienda de interés social"),
         ],
       },
     ],
@@ -218,8 +218,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "solo_venta",
         valor_potencial_ventas: null,
         estado: "activo",
-        necesidades: [
-          necesidad("n9", "p6", "operador", "Operador hotelero para la fase de operación futura"),
+        oportunidades: [
+          oportunidad("n9", "p6", "operador", "Operador hotelero para la fase de operación futura"),
         ],
       },
     ],
@@ -244,8 +244,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "aporte",
         valor_potencial_ventas: 12000000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n11", "p7", "consultor", "Consultoría de mercado turístico regional"),
+        oportunidades: [
+          oportunidad("n11", "p7", "consultor", "Consultoría de mercado turístico regional"),
         ],
       },
     ],
@@ -270,8 +270,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "mixto",
         valor_potencial_ventas: 9000000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n12", "p8", "comercializador", "Comercialización de lotes de segunda vivienda"),
+        oportunidades: [
+          oportunidad("n12", "p8", "comercializador", "Comercialización de lotes de segunda vivienda"),
         ],
       },
     ],
@@ -296,8 +296,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "solo_venta",
         valor_potencial_ventas: 6500000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n13", "p9", "arquitecto", "Diseño de condominio frente al mar"),
+        oportunidades: [
+          oportunidad("n13", "p9", "arquitecto", "Diseño de condominio frente al mar"),
         ],
       },
     ],
@@ -322,7 +322,7 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "aporte",
         valor_potencial_ventas: null,
         estado: "activo",
-        necesidades: [],
+        oportunidades: [],
       },
     ],
   },
@@ -346,9 +346,9 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "mixto",
         valor_potencial_ventas: 30000000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n14", "p11", "banco", "Financiamiento de bodegas portuarias"),
-          necesidad("n15", "p11", "constructor", "Constructor para infraestructura portuaria"),
+        oportunidades: [
+          oportunidad("n14", "p11", "banco", "Financiamiento de bodegas portuarias"),
+          oportunidad("n15", "p11", "constructor", "Constructor para infraestructura portuaria"),
         ],
       },
     ],
@@ -373,8 +373,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "solo_venta",
         valor_potencial_ventas: 14000000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n16", "p12", "arquitecto", "Anteproyecto turístico de bajo impacto"),
+        oportunidades: [
+          oportunidad("n16", "p12", "arquitecto", "Anteproyecto turístico de bajo impacto"),
         ],
       },
     ],
@@ -399,8 +399,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "aporte",
         valor_potencial_ventas: 7200000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n17", "p13", "entidad_publica", "Trámite de licencia ante curaduría"),
+        oportunidades: [
+          oportunidad("n17", "p13", "entidad_publica", "Trámite de licencia ante curaduría"),
         ],
       },
     ],
@@ -425,8 +425,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "mixto",
         valor_potencial_ventas: 4000000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n18", "p14", "consultor", "Estudio de aptitud de uso del suelo rural"),
+        oportunidades: [
+          oportunidad("n18", "p14", "consultor", "Estudio de aptitud de uso del suelo rural"),
         ],
       },
     ],
@@ -451,8 +451,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "solo_venta",
         valor_potencial_ventas: 16000000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n19", "p15", "constructor", "Interventoría de obra industrial"),
+        oportunidades: [
+          oportunidad("n19", "p15", "constructor", "Interventoría de obra industrial"),
         ],
       },
     ],
@@ -477,8 +477,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "aporte",
         valor_potencial_ventas: 22000000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n20", "p16", "arquitecto", "Diseño de edificio de oficinas"),
+        oportunidades: [
+          oportunidad("n20", "p16", "arquitecto", "Diseño de edificio de oficinas"),
         ],
       },
     ],
@@ -503,8 +503,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "mixto",
         valor_potencial_ventas: 28000000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n21", "p17", "operador", "Operador de centro comercial de barrio"),
+        oportunidades: [
+          oportunidad("n21", "p17", "operador", "Operador de centro comercial de barrio"),
         ],
       },
     ],
@@ -529,8 +529,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "solo_venta",
         valor_potencial_ventas: 11000000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n22", "p18", "comercializador", "Comercialización de apartamentos vacacionales"),
+        oportunidades: [
+          oportunidad("n22", "p18", "comercializador", "Comercialización de apartamentos vacacionales"),
         ],
       },
     ],
@@ -555,9 +555,9 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "aporte",
         valor_potencial_ventas: 40000000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n23", "p19", "inversionista", "Capital para estudio de factibilidad eólica"),
-          necesidad("n24", "p19", "consultor", "Consultoría técnica en energía eólica"),
+        oportunidades: [
+          oportunidad("n23", "p19", "inversionista", "Capital para estudio de factibilidad eólica"),
+          oportunidad("n24", "p19", "consultor", "Consultoría técnica en energía eólica"),
         ],
       },
     ],
@@ -582,22 +582,22 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "mixto",
         valor_potencial_ventas: 15000000000,
         estado: "activo",
-        necesidades: [
-          necesidad("n25", "p20", "banco", "Financiamiento para planta de procesamiento de sal"),
+        oportunidades: [
+          oportunidad("n25", "p20", "banco", "Financiamiento para planta de procesamiento de sal"),
         ],
       },
     ],
   },
 ];
 
-export type NecesidadConLote = Necesidad & {
+export type OportunidadConLote = Oportunidad & {
   etapa: EtapaProyecto;
   lote: { id: string; slug: string; nombre: string; ubicacion: string | null };
 };
 
-export const NECESIDADES_MOCK: NecesidadConLote[] = LOTES_MOCK.flatMap((lote) =>
+export const OPORTUNIDADES_MOCK: OportunidadConLote[] = LOTES_MOCK.flatMap((lote) =>
   lote.proyectos.flatMap((proyecto) =>
-    proyecto.necesidades.map((n) => ({
+    proyecto.oportunidades.map((n) => ({
       ...n,
       etapa: proyecto.etapa,
       lote: {
@@ -690,7 +690,7 @@ export const INTERVENCIONES_MOCK: Intervencion[] = [
 ];
 
 // Comentarios internos de ejemplo, además de lo que ya se deriva de
-// lote/proyecto/necesidad/documento/intervención en construirHistorico().
+// lote/proyecto/oportunidad/documento/intervención en construirHistorico().
 const COMENTARIOS_INTERNOS_MOCK: Record<string, { descripcion: string; created_at: string }[]> = {
   m1: [
     {
@@ -718,7 +718,7 @@ const COMENTARIOS_INTERNOS_MOCK: Record<string, { descripcion: string; created_a
 /**
  * Deriva el histórico de un lote a partir de las entidades que ya
  * existen (no se guarda por separado): publicación del lote, apertura
- * de cada necesidad, carga de cada documento, formalización de cada
+ * de cada oportunidad, carga de cada documento, formalización de cada
  * intervención, más comentarios internos de ejemplo. Ordenado del más
  * reciente al más antiguo.
  */
@@ -749,7 +749,7 @@ export function construirHistorico(lote: LoteMock): Evento[] {
       created_at: lote.created_at,
     });
 
-    for (const n of proyecto.necesidades) {
+    for (const n of proyecto.oportunidades) {
       const rol = ROLES_ACTOR.find((r) => r.valor === n.tipo)?.etiqueta ?? n.tipo;
       eventos.push({
         id: `ev-${n.id}`,
@@ -757,7 +757,7 @@ export function construirHistorico(lote: LoteMock): Evento[] {
         proyecto_id: proyecto.id,
         actor_id: null,
         visibilidad: "publica",
-        descripcion: `Se abrió necesidad de ${rol}${n.descripcion ? `: ${n.descripcion}` : ""}.`,
+        descripcion: `Se abrió oportunidad de ${rol}${n.descripcion ? `: ${n.descripcion}` : ""}.`,
         created_at: n.created_at,
       });
     }
