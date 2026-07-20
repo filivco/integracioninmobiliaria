@@ -54,6 +54,7 @@ export interface Lote {
   nombre: string;
   ubicacion: string | null;
   area_m2: number | null;
+  valor_lote: number | null;
   estado_juridico: string | null;
   restricciones: string | null;
   propietario_id: string | null;
@@ -65,6 +66,7 @@ export interface Proyecto {
   lote_id: string;
   etapa: EtapaProyecto;
   modalidad_negociacion: ModalidadNegociacion;
+  valor_potencial_ventas: number | null;
   estado: string | null;
   created_at: string;
 }

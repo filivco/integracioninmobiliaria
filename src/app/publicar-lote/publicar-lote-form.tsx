@@ -22,6 +22,7 @@ export function PublicarLoteForm() {
   const [nombre, setNombre] = useState("");
   const [ubicacion, setUbicacion] = useState("");
   const [areaM2, setAreaM2] = useState("");
+  const [valorLote, setValorLote] = useState("");
   const [estadoJuridico, setEstadoJuridico] = useState("");
   const [modalidad, setModalidad] = useState<ModalidadNegociacion | null>(null);
   const [estado, setEstado] = useState<Estado>("idle");
@@ -47,6 +48,7 @@ export function PublicarLoteForm() {
           nombre,
           ubicacion: ubicacion || null,
           area_m2: areaM2 ? Number(areaM2) : null,
+          valor_lote: valorLote ? Number(valorLote) : null,
           estado_juridico: estadoJuridico || null,
         })
         .select()
@@ -65,6 +67,7 @@ export function PublicarLoteForm() {
       setNombre("");
       setUbicacion("");
       setAreaM2("");
+      setValorLote("");
       setEstadoJuridico("");
       setModalidad(null);
     } catch (err) {
@@ -129,6 +132,18 @@ export function PublicarLoteForm() {
           </label>
 
           <label className="flex flex-col gap-2 text-sm">
+            Valor del lote (COP)
+            <input
+              type="number"
+              min="0"
+              value={valorLote}
+              onChange={(e) => setValorLote(e.target.value)}
+              placeholder="Ej. 1200000000"
+              className="rounded-lg border border-[var(--border)] bg-transparent px-4 py-3 outline-none focus:border-[var(--brand)]"
+            />
+          </label>
+
+          <label className="flex flex-col gap-2 text-sm sm:col-span-2">
             Estado jurídico
             <input
               value={estadoJuridico}

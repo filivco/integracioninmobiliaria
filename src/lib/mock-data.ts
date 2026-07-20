@@ -19,6 +19,7 @@ export type LoteMock = Lote & {
     id: string;
     etapa: EtapaProyecto;
     modalidad_negociacion: ModalidadNegociacion;
+    valor_potencial_ventas: number | null;
     estado: string | null;
     necesidades: Necesidad[];
   }[];
@@ -62,6 +63,7 @@ export const LOTES_MOCK: LoteMock[] = [
     nombre: "Lote frente al mar — Bocagrande",
     ubicacion: "Cartagena, Bolívar",
     area_m2: 3200,
+    valor_lote: 1200000000,
     estado_juridico: "Escriturado, sin gravámenes",
     restricciones: "Altura máxima 25 pisos (POT vigente)",
     propietario_id: "a1",
@@ -76,6 +78,7 @@ export const LOTES_MOCK: LoteMock[] = [
         id: "p1",
         etapa: "factibilidad",
         modalidad_negociacion: "mixto",
+        valor_potencial_ventas: 45000000000,
         estado: "activo",
         necesidades: [
           necesidad("n1", "p1", "constructor", "Constructor para torre residencial de 22 pisos"),
@@ -90,6 +93,7 @@ export const LOTES_MOCK: LoteMock[] = [
     nombre: "Lote esquinero — El Rodadero",
     ubicacion: "Santa Marta, Magdalena",
     area_m2: 1450,
+    valor_lote: 350000000,
     estado_juridico: "Escriturado",
     restricciones: null,
     propietario_id: "a2",
@@ -101,6 +105,7 @@ export const LOTES_MOCK: LoteMock[] = [
         id: "p2",
         etapa: "diseno",
         modalidad_negociacion: "aporte",
+        valor_potencial_ventas: 8000000000,
         estado: "activo",
         necesidades: [
           necesidad("n3", "p2", "arquitecto", "Diseño de proyecto hotelero boutique"),
@@ -115,6 +120,7 @@ export const LOTES_MOCK: LoteMock[] = [
     nombre: "Lote costero — Puerto Colombia",
     ubicacion: "Puerto Colombia, Atlántico",
     area_m2: 8600,
+    valor_lote: 900000000,
     estado_juridico: "En proceso de titulación",
     restricciones: "Zona de manejo costero — requiere licencia ambiental",
     propietario_id: "a3",
@@ -126,6 +132,7 @@ export const LOTES_MOCK: LoteMock[] = [
         id: "p3",
         etapa: "viabilidad",
         modalidad_negociacion: "solo_venta",
+        valor_potencial_ventas: 20000000000,
         estado: "activo",
         necesidades: [
           necesidad("n5", "p3", "consultor", "Consultoría ambiental y de licenciamiento"),
@@ -140,6 +147,7 @@ export const LOTES_MOCK: LoteMock[] = [
     nombre: "Lote industrial — Manzanillo del Mar",
     ubicacion: "Cartagena, Bolívar",
     area_m2: 15000,
+    valor_lote: 3000000000,
     estado_juridico: "Escriturado, sin gravámenes",
     restricciones: "Uso industrial/logístico según POT",
     propietario_id: "a4",
@@ -151,6 +159,7 @@ export const LOTES_MOCK: LoteMock[] = [
         id: "p4",
         etapa: "comercializacion",
         modalidad_negociacion: "mixto",
+        valor_potencial_ventas: 18000000000,
         estado: "activo",
         necesidades: [
           necesidad("n6", "p4", "comercializador", "Comercialización de bodegas logísticas"),
@@ -165,6 +174,7 @@ export const LOTES_MOCK: LoteMock[] = [
     nombre: "Lote suburbano — Vía 40",
     ubicacion: "Soledad, Atlántico",
     area_m2: 5200,
+    valor_lote: 650000000,
     estado_juridico: "Escriturado",
     restricciones: null,
     propietario_id: "a5",
@@ -176,6 +186,7 @@ export const LOTES_MOCK: LoteMock[] = [
         id: "p5",
         etapa: "prefactibilidad",
         modalidad_negociacion: "aporte",
+        valor_potencial_ventas: 9500000000,
         estado: "activo",
         necesidades: [
           necesidad("n8", "p5", "arquitecto", "Anteproyecto de vivienda de interés social"),
@@ -189,6 +200,7 @@ export const LOTES_MOCK: LoteMock[] = [
     nombre: "Lote turístico — Los Corales",
     ubicacion: "San Andrés, San Andrés y Providencia",
     area_m2: 900,
+    valor_lote: 1500000000,
     estado_juridico: "Escriturado, régimen especial insular",
     restricciones: "Requiere concepto Oficina de Control de Circulación y Residencia",
     propietario_id: "a6",
@@ -200,6 +212,7 @@ export const LOTES_MOCK: LoteMock[] = [
         id: "p6",
         etapa: "captacion",
         modalidad_negociacion: "solo_venta",
+        valor_potencial_ventas: null,
         estado: "activo",
         necesidades: [
           necesidad("n9", "p6", "operador", "Operador hotelero para la fase de operación futura"),

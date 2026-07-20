@@ -7,6 +7,7 @@ import { MODALIDADES_NEGOCIACION, ROLES_ACTOR } from "@/lib/types";
 import type { Actor, Documento, Lote, Necesidad, Proyecto } from "@/lib/types";
 import { ACTORES_MOCK, LOTES_MOCK, type LoteMock } from "@/lib/mock-data";
 import { EtapaTimeline } from "@/components/etapa-timeline";
+import { formatCOP } from "@/lib/format";
 
 type LoteDetalle = LoteMock & { propietario: Actor | null };
 
@@ -103,6 +104,15 @@ export default async function LoteDetallePage({
                   )}
                 </div>
 
+                <div>
+                  <p className="text-sm text-[var(--muted)]">Valor potencial de ventas</p>
+                  <p className="mt-1 text-2xl font-semibold">
+                    {proyecto.valor_potencial_ventas != null
+                      ? formatCOP(proyecto.valor_potencial_ventas)
+                      : "Por definir"}
+                  </p>
+                </div>
+
                 <EtapaTimeline etapaActual={proyecto.etapa} />
 
                 <div className="flex flex-col gap-3">
@@ -183,6 +193,12 @@ export default async function LoteDetallePage({
               Resumen
             </h2>
             <dl className="flex flex-col gap-4 text-sm">
+              {lote.valor_lote != null && (
+                <div>
+                  <dt className="text-[var(--muted)]">Valor del lote</dt>
+                  <dd className="mt-1 text-base font-semibold">{formatCOP(lote.valor_lote)}</dd>
+                </div>
+              )}
               {lote.area_m2 != null && (
                 <div>
                   <dt className="text-[var(--muted)]">Área</dt>

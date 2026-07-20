@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ETAPAS, MODALIDADES_NEGOCIACION } from "@/lib/types";
 import type { LoteMock } from "@/lib/mock-data";
+import { formatCOP } from "@/lib/format";
 
 export function LoteCard({ lote }: { lote: LoteMock }) {
   const proyecto = lote.proyectos[0];
@@ -33,6 +34,9 @@ export function LoteCard({ lote }: { lote: LoteMock }) {
         <p className="font-medium leading-snug">{lote.nombre}</p>
         {lote.ubicacion && (
           <p className="text-sm text-[var(--muted)]">{lote.ubicacion}</p>
+        )}
+        {lote.valor_lote != null && (
+          <p className="text-lg font-semibold">{formatCOP(lote.valor_lote)}</p>
         )}
         <div className="mt-auto flex flex-wrap items-center gap-2 pt-3 text-xs">
           {lote.area_m2 != null && (
