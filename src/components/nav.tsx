@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const links = [
   { href: "/lotes", label: "Lotes" },
+  { href: "/necesidades", label: "Necesidades" },
   { href: "/etapas", label: "Etapas" },
   { href: "/actores", label: "Actores" },
   { href: "/como-funciona", label: "Cómo funciona" },
@@ -19,7 +20,7 @@ export function Nav() {
             IntegracionInmobiliaria<span className="text-[var(--muted)]">.com</span>
           </span>
         </Link>
-        <nav className="hidden gap-8 text-sm text-[var(--muted)] sm:flex">
+        <nav className="hidden gap-6 text-sm text-[var(--muted)] lg:flex">
           {links.map((link) => (
             <Link
               key={link.href}

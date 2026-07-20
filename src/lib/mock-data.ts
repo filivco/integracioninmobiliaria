@@ -110,6 +110,7 @@ export const LOTES_MOCK: LoteMock[] = [
         estado: "activo",
         necesidades: [
           necesidad("n5", "p3", "consultor", "Consultoría ambiental y de licenciamiento"),
+          necesidad("n10", "p3", "entidad_publica", "Concepto de autoridad ambiental regional"),
         ],
       },
     ],
@@ -178,11 +179,33 @@ export const LOTES_MOCK: LoteMock[] = [
         etapa: "captacion",
         modalidad_negociacion: "solo_venta",
         estado: "activo",
-        necesidades: [],
+        necesidades: [
+          necesidad("n9", "p6", "operador", "Operador hotelero para la fase de operación futura"),
+        ],
       },
     ],
   },
 ];
+
+export type NecesidadConLote = Necesidad & {
+  etapa: EtapaProyecto;
+  lote: { id: string; slug: string; nombre: string; ubicacion: string | null };
+};
+
+export const NECESIDADES_MOCK: NecesidadConLote[] = LOTES_MOCK.flatMap((lote) =>
+  lote.proyectos.flatMap((proyecto) =>
+    proyecto.necesidades.map((n) => ({
+      ...n,
+      etapa: proyecto.etapa,
+      lote: {
+        id: lote.id,
+        slug: lote.slug,
+        nombre: lote.nombre,
+        ubicacion: lote.ubicacion,
+      },
+    })),
+  ),
+);
 
 export const ACTORES_MOCK: Actor[] = [
   { id: "a1", nombre: "María Fernanda Ospina", rol: "propietario", organizacion_id: null, email: null, telefono: null, created_at: "2026-04-02T00:00:00.000Z" },

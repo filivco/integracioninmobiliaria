@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ETAPAS } from "@/lib/types";
-import { LOTES_MOCK } from "@/lib/mock-data";
+import { LOTES_MOCK, NECESIDADES_MOCK } from "@/lib/mock-data";
 import { LoteCard } from "@/components/lote-card";
+import { NecesidadCard } from "@/components/necesidad-card";
 
 export default function Home() {
   const destacados = LOTES_MOCK.slice(0, 3);
+  const necesidadesDestacadas = NECESIDADES_MOCK.slice(0, 3);
 
   return (
     <div className="flex flex-col">
@@ -35,13 +37,13 @@ export default function Home() {
               href="/publicar-lote"
               className="flex h-12 items-center justify-center rounded-full bg-[var(--brand)] px-6 text-sm font-medium text-[var(--brand-foreground)] transition-opacity hover:opacity-90"
             >
-              Publicar un lote
+              Tengo un lote
             </Link>
             <Link
-              href="/lotes"
+              href="/necesidades"
               className="flex h-12 items-center justify-center rounded-full border border-white/40 bg-white/10 px-6 text-sm font-medium text-white backdrop-blur transition-colors hover:bg-white/20"
             >
-              Ver lotes y proyectos
+              Soy arquitecto, constructor, fiduciaria…
             </Link>
           </div>
         </div>
@@ -63,6 +65,33 @@ export default function Home() {
           <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {destacados.map((lote) => (
               <LoteCard key={lote.id} lote={lote} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[var(--border)] py-20">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <h2 className="text-sm font-medium uppercase tracking-wide text-[var(--muted)]">
+                Necesidades abiertas
+              </h2>
+              <p className="mt-2 max-w-xl text-sm text-[var(--muted)]">
+                El otro lado del marketplace: lo que los proyectos están
+                buscando ahora mismo.
+              </p>
+            </div>
+            <Link
+              href="/necesidades"
+              className="shrink-0 text-sm font-medium text-[var(--brand)] hover:underline"
+            >
+              Ver todas →
+            </Link>
+          </div>
+          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {necesidadesDestacadas.map((n) => (
+              <NecesidadCard key={n.id} necesidad={n} />
             ))}
           </div>
         </div>
