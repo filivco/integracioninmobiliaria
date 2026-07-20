@@ -35,9 +35,22 @@ export function LoteCard({ lote }: { lote: LoteMock }) {
         {lote.ubicacion && (
           <p className="text-sm text-[var(--muted)]">{lote.ubicacion}</p>
         )}
-        {lote.valor_lote != null && (
-          <p className="text-lg font-semibold">{formatCOP(lote.valor_lote)}</p>
-        )}
+        <div className="flex items-end gap-4">
+          {lote.valor_lote != null && (
+            <div>
+              <p className="text-xs text-[var(--muted)]">Valor del lote</p>
+              <p className="text-lg font-semibold">{formatCOP(lote.valor_lote)}</p>
+            </div>
+          )}
+          {proyecto?.valor_potencial_ventas != null && (
+            <div>
+              <p className="text-xs text-[var(--muted)]">Potencial de ventas</p>
+              <p className="text-lg font-semibold text-[var(--brand)]">
+                {formatCOP(proyecto.valor_potencial_ventas)}
+              </p>
+            </div>
+          )}
+        </div>
         <div className="mt-auto flex flex-wrap items-center gap-2 pt-3 text-xs">
           {lote.area_m2 != null && (
             <span className="rounded-full border border-[var(--border)] px-3 py-1">
