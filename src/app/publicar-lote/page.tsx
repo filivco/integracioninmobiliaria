@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PublicarLoteForm } from "./publicar-lote-form";
 
 export const metadata: Metadata = {
-  title: "Publicar lote — IntegracionInmobiliaria.com",
+  title: "Publicar lote o proyecto — IntegracionInmobiliaria.com",
 };
 
 export default function PublicarLotePage() {
@@ -10,7 +10,7 @@ export default function PublicarLotePage() {
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-10 px-6 py-20">
       <div className="flex flex-col gap-3">
         <h1 className="text-3xl font-semibold tracking-tight">
-          Publica tu lote
+          Publica tu lote o proyecto
         </h1>
         <p className="text-[var(--muted)]">
           Cuéntanos sobre tu lote, en qué etapa está tu proyecto (aunque ya

@@ -36,9 +36,9 @@ export function Nav() {
         </nav>
         <Link
           href="/publicar-lote"
-          className="rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-medium text-[var(--brand-foreground)] transition-opacity hover:opacity-90"
+          className="whitespace-nowrap rounded-full bg-[var(--brand)] px-4 py-2 text-sm font-medium text-[var(--brand-foreground)] transition-opacity hover:opacity-90"
         >
-          Publicar lote
+          Publicar lote o proyecto
         </Link>
       </div>
     </header>

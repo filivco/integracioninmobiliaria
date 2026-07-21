@@ -139,7 +139,7 @@ export function PublicarLoteForm() {
   if (estado === "exito") {
     return (
       <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-6 py-10 text-center">
-        <p className="text-lg font-medium">¡Lote publicado!</p>
+        <p className="text-lg font-medium">¡Publicado!</p>
         <p className="mt-2 text-sm text-[var(--muted)]">
           Nuestro equipo revisará la información y se pondrá en contacto
           contigo para acompañarte desde la etapa en la que estás.
@@ -361,7 +361,7 @@ export function PublicarLoteForm() {
         disabled={estado === "enviando"}
         className="flex h-12 w-full items-center justify-center rounded-full bg-[var(--brand)] px-6 text-sm font-medium text-[var(--brand-foreground)] transition-opacity hover:opacity-90 disabled:opacity-50 sm:w-fit"
       >
-        {estado === "enviando" ? "Publicando..." : "Publicar lote"}
+        {estado === "enviando" ? "Publicando..." : "Publicar lote o proyecto"}
       </button>
     </form>
   );

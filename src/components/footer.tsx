@@ -17,7 +17,7 @@ const columnas = [
       { href: "/como-funciona", label: "Cómo funciona" },
       { href: "/sobre-nosotros", label: "Sobre nosotros" },
       { href: "/contacto", label: "Contacto" },
-      { href: "/publicar-lote", label: "Publicar lote" },
+      { href: "/publicar-lote", label: "Publicar lote o proyecto" },
     ],
   },
 ];
