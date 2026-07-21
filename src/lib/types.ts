@@ -34,6 +34,8 @@ export type CapacidadIntervencion =
 
 export type EstadoVerificacion = "verificado" | "en_revision" | "confidencial";
 
+export type SituacionProyecto = "normal" | "siniestrado";
+
 export interface Organizacion {
   id: string;
   nombre: string;
@@ -71,6 +73,8 @@ export interface Proyecto {
   modalidad_negociacion: ModalidadNegociacion;
   valor_potencial_ventas: number | null;
   estado: string | null;
+  situacion: SituacionProyecto;
+  motivo_siniestro: string | null;
   created_at: string;
 }
 
@@ -146,6 +150,11 @@ export const ESTADOS_VERIFICACION: {
   { valor: "verificado", etiqueta: "Propietario verificado" },
   { valor: "en_revision", etiqueta: "Propietario en revisión" },
   { valor: "confidencial", etiqueta: "Propietario confidencial" },
+];
+
+export const SITUACIONES_PROYECTO: { valor: SituacionProyecto; etiqueta: string }[] = [
+  { valor: "normal", etiqueta: "Normal" },
+  { valor: "siniestrado", etiqueta: "Siniestrado — para rescatar" },
 ];
 
 export const MODALIDADES_NEGOCIACION: {

@@ -6,6 +6,7 @@ const columnas = [
     links: [
       { href: "/lotes", label: "Lotes" },
       { href: "/oportunidades", label: "Oportunidades" },
+      { href: "/rescate", label: "Rescate" },
       { href: "/etapas", label: "Etapas" },
       { href: "/actores", label: "Actores" },
     ],

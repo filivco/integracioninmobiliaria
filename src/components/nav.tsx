@@ -3,6 +3,7 @@ import Link from "next/link";
 const links = [
   { href: "/lotes", label: "Lotes" },
   { href: "/oportunidades", label: "Oportunidades" },
+  { href: "/rescate", label: "Rescate", destacado: true },
   { href: "/etapas", label: "Etapas" },
   { href: "/actores", label: "Actores" },
   { href: "/como-funciona", label: "Cómo funciona" },
@@ -25,7 +26,9 @@ export function Nav() {
             <Link
               key={link.href}
               href={link.href}
-              className="transition-colors hover:text-foreground"
+              className={`transition-colors hover:text-foreground ${
+                link.destacado ? "font-medium text-[var(--accent)]" : ""
+              }`}
             >
               {link.label}
             </Link>

@@ -13,6 +13,7 @@ import type {
   Oportunidad,
   Organizacion,
   RolActor,
+  SituacionProyecto,
 } from "./types";
 import { ETAPAS, ROLES_ACTOR } from "./types";
 
@@ -25,6 +26,8 @@ export type LoteMock = Lote & {
     modalidad_negociacion: ModalidadNegociacion;
     valor_potencial_ventas: number | null;
     estado: string | null;
+    situacion: SituacionProyecto;
+    motivo_siniestro: string | null;
     oportunidades: Oportunidad[];
   }[];
 };
@@ -84,6 +87,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "mixto",
         valor_potencial_ventas: 45000000000,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [
           oportunidad("n1", "p1", "constructor", "Constructor para torre residencial de 22 pisos"),
           oportunidad("n2", "p1", "fiduciaria", "Estructuración de fiducia inmobiliaria"),
@@ -111,6 +116,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "aporte",
         valor_potencial_ventas: 8000000000,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [
           oportunidad("n3", "p2", "arquitecto", "Diseño de proyecto hotelero boutique"),
           oportunidad("n4", "p2", "inversionista", "Ronda de capital semilla para diseño y licencia"),
@@ -138,6 +145,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "solo_venta",
         valor_potencial_ventas: 20000000000,
         estado: "activo",
+        situacion: "siniestrado",
+        motivo_siniestro: "Proceso de titulación estancado por conflicto de linderos con predio colindante.",
         oportunidades: [
           oportunidad("n5", "p3", "consultor", "Consultoría ambiental y de licenciamiento"),
           oportunidad("n10", "p3", "entidad_publica", "Concepto de autoridad ambiental regional"),
@@ -165,6 +174,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "mixto",
         valor_potencial_ventas: 18000000000,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [
           oportunidad("n6", "p4", "comercializador", "Comercialización de bodegas logísticas"),
           oportunidad("n7", "p4", "banco", "Crédito constructor"),
@@ -192,6 +203,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "aporte",
         valor_potencial_ventas: 9500000000,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [
           oportunidad("n8", "p5", "arquitecto", "Anteproyecto de vivienda de interés social"),
         ],
@@ -218,6 +231,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "solo_venta",
         valor_potencial_ventas: null,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [
           oportunidad("n9", "p6", "operador", "Operador hotelero para la fase de operación futura"),
         ],
@@ -244,6 +259,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "aporte",
         valor_potencial_ventas: 12000000000,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [
           oportunidad("n11", "p7", "consultor", "Consultoría de mercado turístico regional"),
         ],
@@ -270,6 +287,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "mixto",
         valor_potencial_ventas: 9000000000,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [
           oportunidad("n12", "p8", "comercializador", "Comercialización de lotes de segunda vivienda"),
         ],
@@ -296,6 +315,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "solo_venta",
         valor_potencial_ventas: 6500000000,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [
           oportunidad("n13", "p9", "arquitecto", "Diseño de condominio frente al mar"),
         ],
@@ -322,6 +343,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "aporte",
         valor_potencial_ventas: null,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [],
       },
     ],
@@ -346,6 +369,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "mixto",
         valor_potencial_ventas: 30000000000,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [
           oportunidad("n14", "p11", "banco", "Financiamiento de bodegas portuarias"),
           oportunidad("n15", "p11", "constructor", "Constructor para infraestructura portuaria"),
@@ -373,6 +398,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "solo_venta",
         valor_potencial_ventas: 14000000000,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [
           oportunidad("n16", "p12", "arquitecto", "Anteproyecto turístico de bajo impacto"),
         ],
@@ -399,6 +426,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "aporte",
         valor_potencial_ventas: 7200000000,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [
           oportunidad("n17", "p13", "entidad_publica", "Trámite de licencia ante curaduría"),
         ],
@@ -425,6 +454,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "mixto",
         valor_potencial_ventas: 4000000000,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [
           oportunidad("n18", "p14", "consultor", "Estudio de aptitud de uso del suelo rural"),
         ],
@@ -451,6 +482,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "solo_venta",
         valor_potencial_ventas: 16000000000,
         estado: "activo",
+        situacion: "siniestrado",
+        motivo_siniestro: "Obra paralizada hace 8 meses por incumplimiento del constructor original.",
         oportunidades: [
           oportunidad("n19", "p15", "constructor", "Interventoría de obra industrial"),
         ],
@@ -477,6 +510,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "aporte",
         valor_potencial_ventas: 22000000000,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [
           oportunidad("n20", "p16", "arquitecto", "Diseño de edificio de oficinas"),
         ],
@@ -503,6 +538,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "mixto",
         valor_potencial_ventas: 28000000000,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [
           oportunidad("n21", "p17", "operador", "Operador de centro comercial de barrio"),
         ],
@@ -529,6 +566,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "solo_venta",
         valor_potencial_ventas: 11000000000,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [
           oportunidad("n22", "p18", "comercializador", "Comercialización de apartamentos vacacionales"),
         ],
@@ -555,6 +594,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "aporte",
         valor_potencial_ventas: 40000000000,
         estado: "activo",
+        situacion: "normal",
+        motivo_siniestro: null,
         oportunidades: [
           oportunidad("n23", "p19", "inversionista", "Capital para estudio de factibilidad eólica"),
           oportunidad("n24", "p19", "consultor", "Consultoría técnica en energía eólica"),
@@ -582,6 +623,8 @@ export const LOTES_MOCK: LoteMock[] = [
         modalidad_negociacion: "mixto",
         valor_potencial_ventas: 15000000000,
         estado: "activo",
+        situacion: "siniestrado",
+        motivo_siniestro: "Promotor original en proceso de insolvencia; el proyecto quedó detenido en prefactibilidad.",
         oportunidades: [
           oportunidad("n25", "p20", "banco", "Financiamiento para planta de procesamiento de sal"),
         ],

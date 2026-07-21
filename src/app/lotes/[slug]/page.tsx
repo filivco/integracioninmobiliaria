@@ -95,6 +95,17 @@ export default async function LoteDetallePage({
             );
             return (
               <div key={proyecto.id} className="flex flex-col gap-6 border-t border-[var(--border)] pt-8">
+                {proyecto.situacion === "siniestrado" && (
+                  <div className="flex flex-col gap-1 rounded-xl border border-[var(--accent)] bg-[var(--accent)]/10 px-4 py-3">
+                    <p className="text-sm font-medium text-[var(--accent)]">
+                      Proyecto siniestrado — oportunidad de rescate
+                    </p>
+                    {proyecto.motivo_siniestro && (
+                      <p className="text-sm text-[var(--muted)]">{proyecto.motivo_siniestro}</p>
+                    )}
+                  </div>
+                )}
+
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <h2 className="text-sm font-medium uppercase tracking-wide text-[var(--muted)]">
                     {lote.proyectos.length > 1 ? `Proyecto — ${proyecto.id}` : "Proyecto"}

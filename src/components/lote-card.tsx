@@ -3,10 +3,12 @@ import Link from "next/link";
 import { ETAPAS, MODALIDADES_NEGOCIACION } from "@/lib/types";
 import type { LoteMock } from "@/lib/mock-data";
 import { formatCOP } from "@/lib/format";
+import { SiniestradoBadge } from "@/components/siniestrado-badge";
 
 export function LoteCard({ lote }: { lote: LoteMock }) {
   const proyecto = lote.proyectos[0];
   const tieneProyecto = lote.proyectos.length > 0;
+  const siniestrado = proyecto?.situacion === "siniestrado";
   const etapa = ETAPAS.find((e) => e.valor === proyecto?.etapa);
   const modalidad = MODALIDADES_NEGOCIACION.find(
     (m) => m.valor === proyecto?.modalidad_negociacion,
@@ -28,6 +30,11 @@ export function LoteCard({ lote }: { lote: LoteMock }) {
         {etapa && (
           <span className="absolute left-3 top-3 rounded-full bg-[var(--surface)]/90 px-3 py-1 text-xs font-medium backdrop-blur">
             {etapa.etiqueta}
+          </span>
+        )}
+        {siniestrado && (
+          <span className="absolute right-3 top-3">
+            <SiniestradoBadge />
           </span>
         )}
       </div>
