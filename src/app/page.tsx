@@ -146,21 +146,40 @@ export default function Home() {
       </section>
 
       <section className="border-t border-[var(--border)] py-20">
-        <div className="mx-auto max-w-3xl px-6">
+        <div className="mx-auto max-w-6xl px-6">
           <h2 className="text-sm font-medium uppercase tracking-wide text-[var(--muted)]">
-            Ciclo de vida de un proyecto
+            Te acompañamos del lote a la operación
           </h2>
-          <ol className="mt-6 flex flex-wrap gap-2 text-sm">
-            {ETAPAS.map((etapa, i) => (
-              <li key={etapa.valor} className="flex items-center gap-2">
-                <span className="rounded-full border border-[var(--border)] px-3 py-1">
-                  {etapa.etiqueta}
-                </span>
-                {i < ETAPAS.length - 1 && (
-                  <span className="text-[var(--muted)]">→</span>
-                )}
-              </li>
-            ))}
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--muted)]">
+            No te dejamos solo en ninguna etapa. Desde que postulas el lote
+            hasta que el proyecto entra en operación, hay soporte en cada
+            paso — con la plataforma, o con el equipo interviniendo
+            directamente cuando el proyecto lo amerita.
+          </p>
+          <ol className="mt-8 flex flex-wrap items-center gap-2 text-sm">
+            <li className="flex items-center gap-2">
+              <span className="rounded-full bg-[var(--brand)] px-3 py-1 font-medium text-[var(--brand-foreground)]">
+                Lote
+              </span>
+              <span className="text-[var(--muted)]">→</span>
+            </li>
+            {ETAPAS.map((etapa, i) => {
+              const esUltima = i === ETAPAS.length - 1;
+              return (
+                <li key={etapa.valor} className="flex items-center gap-2">
+                  <span
+                    className={`rounded-full px-3 py-1 ${
+                      esUltima
+                        ? "bg-[var(--brand)] font-medium text-[var(--brand-foreground)]"
+                        : "border border-[var(--border)]"
+                    }`}
+                  >
+                    {etapa.etiqueta}
+                  </span>
+                  {!esUltima && <span className="text-[var(--muted)]">→</span>}
+                </li>
+              );
+            })}
           </ol>
         </div>
       </section>
