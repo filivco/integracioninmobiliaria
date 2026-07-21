@@ -58,6 +58,8 @@ export interface Lote {
   slug: string;
   nombre: string;
   ubicacion: string | null;
+  latitud: number | null;
+  longitud: number | null;
   area_m2: number | null;
   valor_lote: number | null;
   estado_juridico: string | null;

@@ -5,6 +5,7 @@ const columnas = [
     titulo: "Plataforma",
     links: [
       { href: "/lotes", label: "Lotes" },
+      { href: "/mapa", label: "Mapa" },
       { href: "/oportunidades", label: "Oportunidades" },
       { href: "/rescate", label: "Rescate" },
       { href: "/etapas", label: "Etapas" },
