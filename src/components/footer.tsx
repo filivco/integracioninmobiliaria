@@ -36,8 +36,8 @@ export function Footer() {
             </span>
           </Link>
           <p className="max-w-xs text-sm leading-6 text-[#8fa39c]">
-            La infraestructura digital donde los lotes se convierten en
-            proyectos inmobiliarios. Colombia y el Caribe.
+            Ayudamos a convertir terrenos y proyectos con potencial en
+            activos inmobiliarios exitosos. Colombia y el Caribe.
           </p>
         </div>
 

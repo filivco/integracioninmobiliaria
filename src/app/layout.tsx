@@ -23,7 +23,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "IntegracionInmobiliaria.com",
   description:
-    "La infraestructura digital donde los lotes se convierten en proyectos inmobiliarios.",
+    "Ayudamos a convertir terrenos y proyectos con potencial en activos inmobiliarios exitosos.",
 };
 
 export default function RootLayout({

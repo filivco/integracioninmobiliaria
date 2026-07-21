@@ -37,7 +37,8 @@ export default function Home() {
         </div>
         <div className="relative mx-auto flex w-full max-w-6xl flex-col items-start gap-6 px-6 py-32 text-white sm:py-40">
           <h1 className="max-w-2xl text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
-            Donde los lotes se convierten en proyectos inmobiliarios.
+            Ayudamos a convertir terrenos y proyectos con potencial en
+            activos inmobiliarios exitosos.
           </h1>
           <p className="max-w-xl text-lg leading-8 text-white/85">
             Conectamos lotes en Colombia y el Caribe con las etapas y los

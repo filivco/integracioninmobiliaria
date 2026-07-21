@@ -1,6 +1,6 @@
 # IntegracionInmobiliaria.com — Arquitectura de Información y Modelo de Dominio
 
-> La infraestructura digital donde los lotes se convierten en proyectos inmobiliarios.
+> Ayudamos a convertir terrenos y proyectos con potencial en activos inmobiliarios exitosos.
 
 ## 1. Modelo de negocio de dos capas
 
