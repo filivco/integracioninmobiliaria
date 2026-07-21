@@ -34,6 +34,11 @@ export function LoteCard({ lote }: { lote: LoteMock }) {
             <SiniestradoBadge />
           </span>
         )}
+        {!tieneProyecto && (
+          <span className="absolute right-3 top-3 rounded-full bg-[var(--surface)]/90 px-3 py-1 text-xs font-medium backdrop-blur">
+            En venta
+          </span>
+        )}
       </div>
       <div className="flex flex-1 flex-col gap-2 p-5">
         <p className="font-medium leading-snug">{lote.nombre}</p>
