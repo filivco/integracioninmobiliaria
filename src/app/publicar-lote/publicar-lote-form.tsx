@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { MODALIDADES_NEGOCIACION, type ModalidadNegociacion } from "@/lib/types";
+import { ETAPAS, MODALIDADES_NEGOCIACION, type EtapaProyecto, type ModalidadNegociacion } from "@/lib/types";
 
 function slugify(nombre: string) {
   return (
@@ -24,6 +24,7 @@ export function PublicarLoteForm() {
   const [areaM2, setAreaM2] = useState("");
   const [valorLote, setValorLote] = useState("");
   const [estadoJuridico, setEstadoJuridico] = useState("");
+  const [etapa, setEtapa] = useState<EtapaProyecto>("captacion");
   const [modalidad, setModalidad] = useState<ModalidadNegociacion | null>(null);
   const [estado, setEstado] = useState<Estado>("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -59,6 +60,7 @@ export function PublicarLoteForm() {
       const { error: proyectoError } = await supabase.from("proyectos").insert({
         lote_id: lote.id,
         modalidad_negociacion: modalidad,
+        etapa,
       });
 
       if (proyectoError) throw proyectoError;
@@ -69,6 +71,7 @@ export function PublicarLoteForm() {
       setAreaM2("");
       setValorLote("");
       setEstadoJuridico("");
+      setEtapa("captacion");
       setModalidad(null);
     } catch (err) {
       setErrorMsg(
@@ -84,7 +87,7 @@ export function PublicarLoteForm() {
         <p className="text-lg font-medium">¡Lote publicado!</p>
         <p className="mt-2 text-sm text-[var(--muted)]">
           Nuestro equipo revisará la información y se pondrá en contacto
-          contigo para avanzar a la etapa de viabilidad.
+          contigo para acompañarte desde la etapa en la que estás.
         </p>
       </div>
     );
@@ -153,6 +156,28 @@ export function PublicarLoteForm() {
             />
           </label>
         </div>
+      </fieldset>
+
+      <fieldset className="flex flex-col gap-3">
+        <legend className="text-sm font-medium uppercase tracking-wide text-[var(--muted)]">
+          Etapa actual del proyecto
+        </legend>
+        <p className="text-sm text-[var(--muted)]">
+          Si es solo el lote, deja &ldquo;Captación&rdquo;. Si ya tienes un proyecto en
+          curso — diseño, licencia, incluso obra empezada — indícanos en qué
+          etapa está para no hacerte arrancar de cero.
+        </p>
+        <select
+          value={etapa}
+          onChange={(e) => setEtapa(e.target.value as EtapaProyecto)}
+          className="w-full rounded-lg border border-[var(--border)] bg-transparent px-4 py-3 text-sm outline-none focus:border-[var(--brand)] sm:w-auto"
+        >
+          {ETAPAS.map((e) => (
+            <option key={e.valor} value={e.valor}>
+              {e.etiqueta}
+            </option>
+          ))}
+        </select>
       </fieldset>
 
       <fieldset className="flex flex-col gap-4">

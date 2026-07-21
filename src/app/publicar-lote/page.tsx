@@ -13,8 +13,9 @@ export default function PublicarLotePage() {
           Publica tu lote
         </h1>
         <p className="text-[var(--muted)]">
-          Cuéntanos sobre tu lote y cómo quieres participar en el proyecto.
-          Nuestro equipo lo revisa y lo pasa a la etapa de viabilidad.
+          Cuéntanos sobre tu lote, en qué etapa está tu proyecto (aunque ya
+          tengas diseño, licencia u obra en curso) y cómo quieres participar.
+          Nuestro equipo lo revisa y te acompaña desde ahí.
         </p>
       </div>
 
