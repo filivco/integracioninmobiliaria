@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "IntegracionInmobiliaria.com"
+version = "1.0.0"
+id = "artifacts/integracion-inmobiliaria"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21779
+
+[services.development]
+run = "pnpm --filter @workspace/integracion-inmobiliaria run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/integracion-inmobiliaria", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/integracion-inmobiliaria/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21779"
+BASE_PATH = "/"
