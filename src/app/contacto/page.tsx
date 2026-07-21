@@ -17,6 +17,25 @@ export default function ContactoPage() {
       >
         hola@integracioninmobiliaria.com
       </a>
+
+      <dl className="flex flex-col gap-4 border-t border-[var(--border)] pt-8 text-sm">
+        <div>
+          <dt className="text-[var(--muted)]">Teléfono</dt>
+          <dd className="mt-1">
+            <a href="tel:+573504080808" className="hover:text-[var(--brand)]">
+              +57 350 4080808
+            </a>
+          </dd>
+        </div>
+        <div>
+          <dt className="text-[var(--muted)]">Dirección</dt>
+          <dd className="mt-1">
+            Calle 90 # 11-44, Oficina 407
+            <br />
+            Ed. Santorini — Bogotá, CO 110121
+          </dd>
+        </div>
+      </dl>
     </div>
   );
 }

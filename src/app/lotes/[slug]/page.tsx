@@ -239,7 +239,7 @@ export default async function LoteDetallePage({
               Resumen
             </h2>
             <dl className="flex flex-col gap-4 text-sm">
-              {lote.valor_lote != null && (
+              {lote.proyectos.length === 0 && lote.valor_lote != null && (
                 <div>
                   <dt className="text-[var(--muted)]">Valor del lote</dt>
                   <dd className="mt-1 text-base font-semibold">{formatCOP(lote.valor_lote)}</dd>

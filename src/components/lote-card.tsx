@@ -6,6 +6,7 @@ import { formatCOP } from "@/lib/format";
 
 export function LoteCard({ lote }: { lote: LoteMock }) {
   const proyecto = lote.proyectos[0];
+  const tieneProyecto = lote.proyectos.length > 0;
   const etapa = ETAPAS.find((e) => e.valor === proyecto?.etapa);
   const modalidad = MODALIDADES_NEGOCIACION.find(
     (m) => m.valor === proyecto?.modalidad_negociacion,
@@ -36,13 +37,13 @@ export function LoteCard({ lote }: { lote: LoteMock }) {
           <p className="text-sm text-[var(--muted)]">{lote.ubicacion}</p>
         )}
         <div className="flex items-end gap-4">
-          {lote.valor_lote != null && (
+          {!tieneProyecto && lote.valor_lote != null && (
             <div>
               <p className="text-xs text-[var(--muted)]">Valor del lote</p>
               <p className="text-lg font-semibold">{formatCOP(lote.valor_lote)}</p>
             </div>
           )}
-          {proyecto?.valor_potencial_ventas != null && (
+          {tieneProyecto && proyecto?.valor_potencial_ventas != null && (
             <div>
               <p className="text-xs text-[var(--muted)]">Potencial de ventas</p>
               <p className="text-lg font-semibold text-[var(--brand)]">

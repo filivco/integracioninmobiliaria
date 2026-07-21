@@ -10,7 +10,10 @@ export default function Home() {
   const destacados = LOTES_MOCK.slice(0, 3);
   const oportunidadesDestacadas = OPORTUNIDADES_MOCK.slice(0, 3);
 
-  const valorCartera = LOTES_MOCK.reduce((suma, l) => suma + (l.valor_lote ?? 0), 0);
+  const valorCartera = LOTES_MOCK.reduce((suma, l) => {
+    const valor = l.proyectos.length > 0 ? l.proyectos[0].valor_potencial_ventas : l.valor_lote;
+    return suma + (valor ?? 0);
+  }, 0);
   const stats = [
     { valor: LOTES_MOCK.length.toLocaleString("es-CO"), etiqueta: "Lotes activos" },
     { valor: formatCOP(valorCartera), etiqueta: "Valor en cartera" },

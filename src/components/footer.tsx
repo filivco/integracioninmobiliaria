@@ -70,7 +70,16 @@ export function Footer() {
                 hola@integracioninmobiliaria.com
               </a>
             </li>
-            <li className="text-[#8fa39c]">Cartagena, Colombia</li>
+            <li>
+              <a href="tel:+573504080808" className="transition-colors hover:text-white">
+                +57 350 4080808
+              </a>
+            </li>
+            <li className="text-[#8fa39c]">
+              Calle 90 # 11-44, Oficina 407
+              <br />
+              Ed. Santorini — Bogotá, CO 110121
+            </li>
           </ul>
         </div>
       </div>
