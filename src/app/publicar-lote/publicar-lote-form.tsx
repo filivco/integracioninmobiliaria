@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { ETAPAS, MODALIDADES_NEGOCIACION, type EtapaProyecto, type ModalidadNegociacion } from "@/lib/types";
+import {
+  ETAPAS,
+  MODALIDADES_NEGOCIACION,
+  type EtapaProyecto,
+  type ModalidadNegociacion,
+} from "@/lib/types";
 
 function slugify(nombre: string) {
   return (
@@ -16,23 +21,69 @@ function slugify(nombre: string) {
   );
 }
 
+type TipoIngreso = "lote" | "lote_con_proyecto" | "proyecto_iniciado" | "siniestrado";
+
+const OPCIONES_TIPO: {
+  valor: TipoIngreso;
+  etiqueta: string;
+  descripcion: string;
+}[] = [
+  {
+    valor: "lote",
+    etiqueta: "Un lote",
+    descripcion: "Todavía no hay proyecto — solo el terreno.",
+  },
+  {
+    valor: "lote_con_proyecto",
+    etiqueta: "Un lote con proyecto",
+    descripcion: "Ya tienes un proyecto pensado o en etapas tempranas.",
+  },
+  {
+    valor: "proyecto_iniciado",
+    etiqueta: "Un proyecto ya iniciado",
+    descripcion: "Diseño, licencia o incluso obra en curso.",
+  },
+];
+
+const CONFIG_TIPO: Record<
+  TipoIngreso,
+  { etapaDefault: EtapaProyecto; mostrarEtapa: boolean; mostrarMotivo: boolean }
+> = {
+  lote: { etapaDefault: "captacion", mostrarEtapa: false, mostrarMotivo: false },
+  lote_con_proyecto: { etapaDefault: "viabilidad", mostrarEtapa: true, mostrarMotivo: false },
+  proyecto_iniciado: { etapaDefault: "diseno", mostrarEtapa: true, mostrarMotivo: false },
+  siniestrado: { etapaDefault: "diseno", mostrarEtapa: true, mostrarMotivo: true },
+};
+
 type Estado = "idle" | "enviando" | "exito" | "error";
 
 export function PublicarLoteForm() {
+  const [tipo, setTipo] = useState<TipoIngreso | null>(null);
   const [nombre, setNombre] = useState("");
   const [ubicacion, setUbicacion] = useState("");
   const [areaM2, setAreaM2] = useState("");
   const [valorLote, setValorLote] = useState("");
   const [estadoJuridico, setEstadoJuridico] = useState("");
   const [etapa, setEtapa] = useState<EtapaProyecto>("captacion");
+  const [motivoSiniestro, setMotivoSiniestro] = useState("");
   const [modalidad, setModalidad] = useState<ModalidadNegociacion | null>(null);
   const [estado, setEstado] = useState<Estado>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+
+  function elegirTipo(t: TipoIngreso) {
+    setTipo(t);
+    setEtapa(CONFIG_TIPO[t].etapaDefault);
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!modalidad) {
       setErrorMsg("Elige una modalidad de negociación para continuar.");
+      setEstado("error");
+      return;
+    }
+    if (tipo === "siniestrado" && !motivoSiniestro.trim()) {
+      setErrorMsg("Cuéntanos qué pasó con el proyecto para poder evaluarlo.");
       setEstado("error");
       return;
     }
@@ -61,17 +112,21 @@ export function PublicarLoteForm() {
         lote_id: lote.id,
         modalidad_negociacion: modalidad,
         etapa,
+        situacion: tipo === "siniestrado" ? "siniestrado" : "normal",
+        motivo_siniestro: tipo === "siniestrado" ? motivoSiniestro : null,
       });
 
       if (proyectoError) throw proyectoError;
 
       setEstado("exito");
+      setTipo(null);
       setNombre("");
       setUbicacion("");
       setAreaM2("");
       setValorLote("");
       setEstadoJuridico("");
       setEtapa("captacion");
+      setMotivoSiniestro("");
       setModalidad(null);
     } catch (err) {
       setErrorMsg(
@@ -93,8 +148,67 @@ export function PublicarLoteForm() {
     );
   }
 
+  if (!tipo) {
+    return (
+      <div className="flex flex-col gap-6">
+        <fieldset className="flex flex-col gap-4">
+          <legend className="text-sm font-medium uppercase tracking-wide text-[var(--muted)]">
+            ¿Qué tienes?
+          </legend>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {OPCIONES_TIPO.map((o) => (
+              <button
+                key={o.valor}
+                type="button"
+                onClick={() => elegirTipo(o.valor)}
+                className="flex flex-col items-start gap-2 rounded-2xl border-2 border-[var(--border)] px-5 py-6 text-left transition-colors hover:border-[var(--brand)]"
+              >
+                <span className="text-base font-semibold uppercase tracking-wide">
+                  {o.etiqueta}
+                </span>
+                <span className="text-sm leading-5 text-[var(--muted)]">
+                  {o.descripcion}
+                </span>
+              </button>
+            ))}
+          </div>
+        </fieldset>
+
+        <button
+          type="button"
+          onClick={() => elegirTipo("siniestrado")}
+          className="w-fit text-sm text-[var(--muted)] underline underline-offset-4 hover:text-[var(--accent)]"
+        >
+          ¿Tu proyecto está siniestrado (obra parada, promotor insolvente, litigio)? Publícalo aquí →
+        </button>
+      </div>
+    );
+  }
+
+  const config = CONFIG_TIPO[tipo];
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-10">
+      <button
+        type="button"
+        onClick={() => setTipo(null)}
+        className="w-fit text-sm text-[var(--muted)] hover:text-[var(--brand)]"
+      >
+        ← Cambiar
+      </button>
+
+      {tipo === "siniestrado" && (
+        <div className="rounded-xl border border-[var(--accent)] bg-[var(--accent)]/10 px-4 py-3">
+          <p className="text-sm font-medium text-[var(--accent)]">
+            Proyecto siniestrado
+          </p>
+          <p className="mt-1 text-sm text-[var(--muted)]">
+            Cuéntanos qué pasó. Esta es la capa de negocio: nuestro equipo
+            evalúa intervenir directamente para estructurar el rescate.
+          </p>
+        </div>
+      )}
+
       <fieldset className="flex flex-col gap-6">
         <legend className="text-sm font-medium uppercase tracking-wide text-[var(--muted)]">
           Datos del lote
@@ -158,27 +272,40 @@ export function PublicarLoteForm() {
         </div>
       </fieldset>
 
-      <fieldset className="flex flex-col gap-3">
-        <legend className="text-sm font-medium uppercase tracking-wide text-[var(--muted)]">
-          Etapa actual del proyecto
-        </legend>
-        <p className="text-sm text-[var(--muted)]">
-          Si es solo el lote, deja &ldquo;Captación&rdquo;. Si ya tienes un proyecto en
-          curso — diseño, licencia, incluso obra empezada — indícanos en qué
-          etapa está para no hacerte arrancar de cero.
-        </p>
-        <select
-          value={etapa}
-          onChange={(e) => setEtapa(e.target.value as EtapaProyecto)}
-          className="w-full rounded-lg border border-[var(--border)] bg-transparent px-4 py-3 text-sm outline-none focus:border-[var(--brand)] sm:w-auto"
-        >
-          {ETAPAS.map((e) => (
-            <option key={e.valor} value={e.valor}>
-              {e.etiqueta}
-            </option>
-          ))}
-        </select>
-      </fieldset>
+      {config.mostrarEtapa && (
+        <fieldset className="flex flex-col gap-3">
+          <legend className="text-sm font-medium uppercase tracking-wide text-[var(--muted)]">
+            {tipo === "siniestrado" ? "¿En qué etapa quedó detenido?" : "Etapa actual del proyecto"}
+          </legend>
+          <select
+            value={etapa}
+            onChange={(e) => setEtapa(e.target.value as EtapaProyecto)}
+            className="w-full rounded-lg border border-[var(--border)] bg-transparent px-4 py-3 text-sm outline-none focus:border-[var(--brand)] sm:w-auto"
+          >
+            {ETAPAS.map((e) => (
+              <option key={e.valor} value={e.valor}>
+                {e.etiqueta}
+              </option>
+            ))}
+          </select>
+        </fieldset>
+      )}
+
+      {config.mostrarMotivo && (
+        <fieldset className="flex flex-col gap-3">
+          <legend className="text-sm font-medium uppercase tracking-wide text-[var(--muted)]">
+            ¿Qué pasó con el proyecto?
+          </legend>
+          <textarea
+            required
+            value={motivoSiniestro}
+            onChange={(e) => setMotivoSiniestro(e.target.value)}
+            placeholder="Ej. Obra paralizada por incumplimiento del constructor, promotor en insolvencia, litigio societario…"
+            rows={3}
+            className="rounded-lg border border-[var(--border)] bg-transparent px-4 py-3 text-sm outline-none focus:border-[var(--brand)]"
+          />
+        </fieldset>
+      )}
 
       <fieldset className="flex flex-col gap-4">
         <legend className="text-sm font-medium uppercase tracking-wide text-[var(--muted)]">
