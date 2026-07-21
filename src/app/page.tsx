@@ -4,6 +4,7 @@ import { ETAPAS } from "@/lib/types";
 import { ACTORES_MOCK, LOTES_MOCK, OPORTUNIDADES_MOCK } from "@/lib/mock-data";
 import { LoteCard } from "@/components/lote-card";
 import { OportunidadCard } from "@/components/oportunidad-card";
+import { EtapaIcon } from "@/components/etapa-icon";
 import { formatCOP } from "@/lib/format";
 
 export default function Home() {
@@ -176,7 +177,8 @@ export default function Home() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--brand)] opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--brand)]" />
                 </span>
-                <span className="rounded-full bg-[var(--brand)] px-3 py-1 text-sm font-medium text-[var(--brand-foreground)]">
+                <span className="flex items-center gap-1.5 rounded-full bg-[var(--brand)] px-3 py-1 text-sm font-medium text-[var(--brand-foreground)]">
+                  <EtapaIcon id="lote" />
                   Lote
                 </span>
               </li>
@@ -192,12 +194,13 @@ export default function Home() {
                       </span>
                     )}
                     <span
-                      className={`whitespace-nowrap rounded-full px-3 py-1 text-sm ${
+                      className={`flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-sm ${
                         esUltima
                           ? "bg-[var(--brand)] font-medium text-[var(--brand-foreground)]"
                           : "border border-[var(--border)] bg-[var(--background)]"
                       }`}
                     >
+                      <EtapaIcon id={etapa.valor} />
                       {etapa.etiqueta}
                     </span>
                   </li>
