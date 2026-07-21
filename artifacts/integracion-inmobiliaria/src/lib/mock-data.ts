@@ -36,6 +36,11 @@ function img(seed: string) {
   return `/mock/${seed}.svg`;
 }
 
+/** Imagen aérea/satélite generada (JPEG) */
+function imgJ(seed: string) {
+  return `/mock/${seed}.jpg`;
+}
+
 function oportunidad(
   id: string,
   proyecto_id: string,
@@ -78,7 +83,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: "Altura máxima 25 pisos (POT vigente)",
     propietario_id: "a1",
     created_at: "2026-04-02T00:00:00.000Z",
-    imagenes: [img("bocagrande-1"), img("bocagrande-2"), img("bocagrande-3")],
+    imagenes: [imgJ("aerea-costera"), imgJ("aerea-urbana")],
     documentos: [
       documento("d1", "m1", "Escritura pública"),
       documento("d2", "m1", "Estudio de suelos"),
@@ -113,7 +118,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: null,
     propietario_id: "a2",
     created_at: "2026-04-10T00:00:00.000Z",
-    imagenes: [img("rodadero-1"), img("rodadero-2")],
+    imagenes: [imgJ("aerea-costera"), imgJ("aerea-turistica")],
     documentos: [],
     proyectos: [
       {
@@ -145,7 +150,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: "Zona de manejo costero — requiere licencia ambiental",
     propietario_id: "a3",
     created_at: "2026-03-18T00:00:00.000Z",
-    imagenes: [img("puertocolombia-1"), img("puertocolombia-2"), img("puertocolombia-3")],
+    imagenes: [imgJ("aerea-costera"), imgJ("aerea-turistica")],
     documentos: [],
     proyectos: [
       {
@@ -177,7 +182,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: "Uso industrial/logístico según POT",
     propietario_id: "a4",
     created_at: "2026-02-25T00:00:00.000Z",
-    imagenes: [img("manzanillo-1"), img("manzanillo-2")],
+    imagenes: [imgJ("aerea-portuaria"), imgJ("aerea-urbana")],
     documentos: [documento("d3", "m4", "Licencia de uso de suelo")],
     proyectos: [
       {
@@ -209,7 +214,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: null,
     propietario_id: "a5",
     created_at: "2026-05-30T00:00:00.000Z",
-    imagenes: [img("via40-1"), img("via40-2")],
+    imagenes: [imgJ("aerea-suburbana"), imgJ("aerea-rural")],
     documentos: [],
     proyectos: [
       {
@@ -239,7 +244,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: "Requiere concepto Oficina de Control de Circulación y Residencia",
     propietario_id: "a6",
     created_at: "2026-06-12T00:00:00.000Z",
-    imagenes: [img("sanandres-1"), img("sanandres-2"), img("sanandres-3")],
+    imagenes: [imgJ("aerea-insular"), imgJ("aerea-turistica")],
     documentos: [],
     proyectos: [
       {
@@ -269,7 +274,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: null,
     propietario_id: "a10",
     created_at: "2026-01-15T00:00:00.000Z",
-    imagenes: [img("riohacha-1"), img("riohacha-2")],
+    imagenes: [imgJ("aerea-costera"), imgJ("aerea-turistica")],
     documentos: [],
     proyectos: [
       {
@@ -299,7 +304,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: null,
     propietario_id: "a11",
     created_at: "2026-01-20T00:00:00.000Z",
-    imagenes: [img("covenas-1"), img("covenas-2")],
+    imagenes: [imgJ("aerea-turistica"), imgJ("aerea-costera")],
     documentos: [],
     proyectos: [
       {
@@ -329,7 +334,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: null,
     propietario_id: "a12",
     created_at: "2026-02-02T00:00:00.000Z",
-    imagenes: [img("tolu-1"), img("tolu-2")],
+    imagenes: [imgJ("aerea-costera"), imgJ("aerea-turistica")],
     documentos: [],
     proyectos: [
       {
@@ -359,7 +364,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: "Requiere concepto de la Oficina de Control de Circulación y Residencia",
     propietario_id: "a13",
     created_at: "2026-06-25T00:00:00.000Z",
-    imagenes: [img("providencia-1"), img("providencia-2")],
+    imagenes: [imgJ("aerea-insular"), imgJ("aerea-costera")],
     documentos: [],
     proyectos: [
       {
@@ -387,7 +392,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: "Uso portuario/logístico — requiere concesión marítima",
     propietario_id: "a14",
     created_at: "2026-01-08T00:00:00.000Z",
-    imagenes: [img("turbo-1"), img("turbo-2")],
+    imagenes: [imgJ("aerea-portuaria"), imgJ("aerea-rural")],
     documentos: [documento("d4", "m11", "Concepto de concesión portuaria")],
     proyectos: [
       {
@@ -418,7 +423,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: null,
     propietario_id: "a15",
     created_at: "2026-02-14T00:00:00.000Z",
-    imagenes: [img("necocli-1"), img("necocli-2")],
+    imagenes: [imgJ("aerea-turistica"), imgJ("aerea-costera")],
     documentos: [],
     proyectos: [
       {
@@ -448,7 +453,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: null,
     propietario_id: "a16",
     created_at: "2026-03-01T00:00:00.000Z",
-    imagenes: [img("cienaga-1"), img("cienaga-2")],
+    imagenes: [imgJ("aerea-rural"), imgJ("aerea-rio")],
     documentos: [],
     proyectos: [
       {
@@ -478,7 +483,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: "Zona de amortiguación de ciénaga — requiere concepto ambiental",
     propietario_id: "a17",
     created_at: "2026-01-28T00:00:00.000Z",
-    imagenes: [img("sitionuevo-1"), img("sitionuevo-2")],
+    imagenes: [imgJ("aerea-rural"), imgJ("aerea-rio")],
     documentos: [],
     proyectos: [
       {
@@ -508,7 +513,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: "Uso industrial según POT",
     propietario_id: "a18",
     created_at: "2026-02-19T00:00:00.000Z",
-    imagenes: [img("malambo-1"), img("malambo-2")],
+    imagenes: [imgJ("aerea-suburbana"), imgJ("aerea-portuaria")],
     documentos: [],
     proyectos: [
       {
@@ -538,7 +543,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: "Uso comercial/oficinas según POT",
     propietario_id: "a19",
     created_at: "2026-03-10T00:00:00.000Z",
-    imagenes: [img("altoprado-1"), img("altoprado-2")],
+    imagenes: [imgJ("aerea-urbana"), imgJ("aerea-suburbana")],
     documentos: [],
     proyectos: [
       {
@@ -568,7 +573,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: null,
     propietario_id: "a20",
     created_at: "2026-04-22T00:00:00.000Z",
-    imagenes: [img("manga-1"), img("manga-2")],
+    imagenes: [imgJ("aerea-urbana"), imgJ("aerea-costera")],
     documentos: [],
     proyectos: [
       {
@@ -598,7 +603,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: null,
     propietario_id: "a21",
     created_at: "2026-05-05T00:00:00.000Z",
-    imagenes: [img("gaira-1"), img("gaira-2")],
+    imagenes: [imgJ("aerea-costera"), imgJ("aerea-turistica")],
     documentos: [],
     proyectos: [
       {
@@ -628,7 +633,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: "Uso de energía renovable — requiere licencia ambiental",
     propietario_id: "a22",
     created_at: "2026-01-05T00:00:00.000Z",
-    imagenes: [img("uribia-1"), img("uribia-2")],
+    imagenes: [imgJ("aerea-rural"), imgJ("aerea-costera")],
     documentos: [],
     proyectos: [
       {
@@ -659,7 +664,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: "Uso industrial — cercano a salinas",
     propietario_id: "a23",
     created_at: "2026-02-08T00:00:00.000Z",
-    imagenes: [img("manaure-1"), img("manaure-2")],
+    imagenes: [imgJ("aerea-costera"), imgJ("aerea-rural")],
     documentos: [],
     proyectos: [
       {
@@ -691,7 +696,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: null,
     propietario_id: "a3",
     created_at: "2026-07-01T00:00:00.000Z",
-    imagenes: [img("generico")],
+    imagenes: [imgJ("aerea-urbana"), imgJ("aerea-costera")],
     documentos: [],
     proyectos: [],
   },
@@ -708,7 +713,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: "Zona de ladera — requiere estudio de suelos",
     propietario_id: "a7",
     created_at: "2026-07-03T00:00:00.000Z",
-    imagenes: [img("generico")],
+    imagenes: [imgJ("aerea-ladera"), imgJ("aerea-costera")],
     documentos: [],
     proyectos: [],
   },
@@ -725,7 +730,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: null,
     propietario_id: "a11",
     created_at: "2026-07-05T00:00:00.000Z",
-    imagenes: [img("generico")],
+    imagenes: [imgJ("aerea-suburbana"), imgJ("aerea-rural")],
     documentos: [],
     proyectos: [],
   },
@@ -742,7 +747,7 @@ export const LOTES_MOCK: LoteMock[] = [
     restricciones: "Zona de influencia río Palomino — restricción de construcción a 30 m del cauce",
     propietario_id: "a15",
     created_at: "2026-07-08T00:00:00.000Z",
-    imagenes: [img("generico")],
+    imagenes: [imgJ("aerea-rio"), imgJ("aerea-costera")],
     documentos: [],
     proyectos: [],
   },
