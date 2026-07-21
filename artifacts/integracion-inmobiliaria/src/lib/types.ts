@@ -120,7 +120,6 @@ export interface Evento {
 }
 
 export const ETAPAS: { valor: EtapaProyecto; etiqueta: string }[] = [
-  { valor: "captacion", etiqueta: "Captación" },
   { valor: "viabilidad", etiqueta: "Viabilidad" },
   { valor: "prefactibilidad", etiqueta: "Prefactibilidad" },
   { valor: "factibilidad", etiqueta: "Factibilidad" },

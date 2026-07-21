@@ -239,7 +239,7 @@ export const LOTES_MOCK: LoteMock[] = [
     proyectos: [
       {
         id: "p6",
-        etapa: "captacion",
+        etapa: "viabilidad",
         modalidad_negociacion: "solo_venta",
         valor_potencial_ventas: null,
         estado: "activo",
@@ -359,7 +359,7 @@ export const LOTES_MOCK: LoteMock[] = [
     proyectos: [
       {
         id: "p10",
-        etapa: "captacion",
+        etapa: "viabilidad",
         modalidad_negociacion: "aporte",
         valor_potencial_ventas: null,
         estado: "activo",

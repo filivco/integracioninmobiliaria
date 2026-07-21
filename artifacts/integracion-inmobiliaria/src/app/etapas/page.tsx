@@ -1,7 +1,6 @@
 import { ETAPAS } from "@/lib/types";
 
 const DESCRIPCIONES: Record<string, string> = {
-  captacion: "El propietario postula el lote y define su modalidad de negociación.",
   viabilidad: "Se evalúa si el lote tiene potencial para un proyecto inmobiliario.",
   prefactibilidad: "Análisis preliminar de mercado, normativa y modelo de negocio.",
   factibilidad: "Estudio detallado que confirma la conveniencia técnica y financiera.",

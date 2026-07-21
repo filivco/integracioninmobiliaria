@@ -49,7 +49,7 @@ const CONFIG_TIPO: Record<
   TipoIngreso,
   { etapaDefault: EtapaProyecto; mostrarEtapa: boolean; mostrarMotivo: boolean }
 > = {
-  lote: { etapaDefault: "captacion", mostrarEtapa: false, mostrarMotivo: false },
+  lote: { etapaDefault: "viabilidad", mostrarEtapa: false, mostrarMotivo: false },
   lote_con_proyecto: { etapaDefault: "viabilidad", mostrarEtapa: true, mostrarMotivo: false },
   proyecto_iniciado: { etapaDefault: "diseno", mostrarEtapa: true, mostrarMotivo: false },
   siniestrado: { etapaDefault: "diseno", mostrarEtapa: true, mostrarMotivo: true },
