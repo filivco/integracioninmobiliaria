@@ -156,31 +156,55 @@ export default function Home() {
             paso — con la plataforma, o con el equipo interviniendo
             directamente cuando el proyecto lo amerita.
           </p>
-          <ol className="mt-8 flex flex-wrap items-center gap-2 text-sm">
-            <li className="flex items-center gap-2">
-              <span className="rounded-full bg-[var(--brand)] px-3 py-1 font-medium text-[var(--brand-foreground)]">
-                Lote
-              </span>
-              <span className="text-[var(--muted)]">→</span>
-            </li>
-            {ETAPAS.map((etapa, i) => {
-              const esUltima = i === ETAPAS.length - 1;
-              return (
-                <li key={etapa.valor} className="flex items-center gap-2">
-                  <span
-                    className={`rounded-full px-3 py-1 ${
-                      esUltima
-                        ? "bg-[var(--brand)] font-medium text-[var(--brand-foreground)]"
-                        : "border border-[var(--border)]"
-                    }`}
-                  >
-                    {etapa.etiqueta}
-                  </span>
-                  {!esUltima && <span className="text-[var(--muted)]">→</span>}
-                </li>
-              );
-            })}
-          </ol>
+          <div
+            className="-mx-6 mt-10 overflow-x-auto px-6 pb-3"
+            style={{
+              maskImage:
+                "linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent)",
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent)",
+            }}
+          >
+            <ol className="relative flex w-max items-center gap-7">
+              <div
+                aria-hidden
+                className="linea-recorrido pointer-events-none absolute inset-x-0 top-1/2 h-px -translate-y-1/2"
+              />
+
+              <li className="relative z-10 flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--brand)] opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--brand)]" />
+                </span>
+                <span className="rounded-full bg-[var(--brand)] px-3 py-1 text-sm font-medium text-[var(--brand-foreground)]">
+                  Lote
+                </span>
+              </li>
+
+              {ETAPAS.map((etapa, i) => {
+                const esUltima = i === ETAPAS.length - 1;
+                return (
+                  <li key={etapa.valor} className="relative z-10 flex items-center gap-2">
+                    {esUltima && (
+                      <span className="relative flex h-2 w-2">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--brand)] opacity-75" />
+                        <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--brand)]" />
+                      </span>
+                    )}
+                    <span
+                      className={`whitespace-nowrap rounded-full px-3 py-1 text-sm ${
+                        esUltima
+                          ? "bg-[var(--brand)] font-medium text-[var(--brand-foreground)]"
+                          : "border border-[var(--border)] bg-[var(--background)]"
+                      }`}
+                    >
+                      {etapa.etiqueta}
+                    </span>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
         </div>
       </section>
     </div>
