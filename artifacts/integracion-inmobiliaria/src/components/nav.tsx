@@ -1,4 +1,3 @@
-import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
 
 const links = [
@@ -12,63 +11,6 @@ const lotesSubmenu = [
   { href: "/lotes", label: "Lotes y proyectos" },
   { href: "/mapa", label: "Mapa de oportunidades" },
 ];
-
-function LotesDropdown() {
-  const [abierto, setAbierto] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function onClickFuera(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setAbierto(false);
-      }
-    }
-    document.addEventListener("mousedown", onClickFuera);
-    return () => document.removeEventListener("mousedown", onClickFuera);
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className="relative"
-      onMouseEnter={() => setAbierto(true)}
-      onMouseLeave={() => setAbierto(false)}
-    >
-      <button
-        type="button"
-        onClick={() => setAbierto((v) => !v)}
-        className="flex items-center gap-1 transition-colors hover:text-foreground"
-        aria-expanded={abierto}
-      >
-        Lotes y proyectos
-        <svg
-          className={`h-3.5 w-3.5 transition-transform ${abierto ? "rotate-180" : ""}`}
-          viewBox="0 0 12 12"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-        >
-          <path d="M2 4l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </button>
-
-      {abierto && (
-        <div className="absolute left-0 top-full z-20 mt-2 w-52 overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--background)] shadow-lg">
-          {lotesSubmenu.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setAbierto(false)}
-              className="flex px-4 py-3 text-sm text-[var(--muted)] transition-colors hover:bg-[var(--surface)] hover:text-foreground"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 
 export function Nav() {
   return (
@@ -84,7 +26,40 @@ export function Nav() {
         </Link>
 
         <nav className="hidden items-center gap-6 text-sm text-[var(--muted)] lg:flex">
-          <LotesDropdown />
+          {/* Dropdown Lotes — hover puro con CSS */}
+          <div className="group relative">
+            <button
+              type="button"
+              className="flex items-center gap-1 transition-colors hover:text-foreground"
+            >
+              Lotes y proyectos
+              <svg
+                className="h-3.5 w-3.5 transition-transform duration-150 group-hover:rotate-180"
+                viewBox="0 0 12 12"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+              >
+                <path d="M2 4l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+
+            {/* Panel: empieza con pt-2 para eliminar el gap entre botón y panel */}
+            <div className="pointer-events-none absolute left-0 top-full z-20 pt-2 opacity-0 transition-opacity duration-150 group-hover:pointer-events-auto group-hover:opacity-100">
+              <div className="w-52 overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--background)] shadow-lg">
+                {lotesSubmenu.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="flex px-4 py-3 text-sm text-[var(--muted)] transition-colors hover:bg-[var(--surface)] hover:text-foreground"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
           {links.map((link) => (
             <Link
               key={link.href}
