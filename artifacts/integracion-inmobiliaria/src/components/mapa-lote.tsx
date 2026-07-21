@@ -67,8 +67,8 @@ export function MapaLote({ latitud, longitud, poligono, nombre, altura = 260 }: 
               id="lote-fill"
               type="fill"
               paint={{
-                "fill-color": "var(--brand, #1a7a5e)",
-                "fill-opacity": 0.18,
+                "fill-color": "#0e6e5d",
+                "fill-opacity": 0.2,
               }}
             />
             {/* Contorno */}
@@ -76,9 +76,9 @@ export function MapaLote({ latitud, longitud, poligono, nombre, altura = 260 }: 
               id="lote-outline"
               type="line"
               paint={{
-                "line-color": "var(--brand, #1a7a5e)",
+                "line-color": "#0e6e5d",
                 "line-width": 2.5,
-                "line-opacity": 0.9,
+                "line-opacity": 1,
               }}
             />
           </Source>
