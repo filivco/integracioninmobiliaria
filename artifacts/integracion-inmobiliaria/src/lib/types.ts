@@ -60,6 +60,8 @@ export interface Lote {
   ubicacion: string | null;
   latitud: number | null;
   longitud: number | null;
+  /** Coordenadas GeoJSON del polígono: array de anillos, cada anillo es [[lng, lat], ...] */
+  poligono?: [number, number][][] | null;
   area_m2: number | null;
   valor_lote: number | null;
   estado_juridico: string | null;

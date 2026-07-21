@@ -248,11 +248,13 @@ export default function LoteDetallePage({ slug }: { slug: string }) {
         </div>
 
         <aside className="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">
-          {lote.latitud != null && lote.longitud != null && (
+          {(lote.poligono || (lote.latitud != null && lote.longitud != null)) && (
             <MapaLote
               latitud={lote.latitud}
               longitud={lote.longitud}
+              poligono={lote.poligono}
               nombre={lote.nombre}
+              altura={280}
             />
           )}
 
