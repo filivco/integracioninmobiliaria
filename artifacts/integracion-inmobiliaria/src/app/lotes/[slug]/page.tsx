@@ -7,6 +7,7 @@ import { ACTORES_MOCK, CAPACIDADES_INTERVENCION, INTERVENCIONES_MOCK, LOTES_MOCK
 import { EtapaTimeline } from "@/components/etapa-timeline";
 import { EventoTimeline } from "@/components/evento-timeline";
 import { VerificacionBadge } from "@/components/verificacion-badge";
+import { MapaLote } from "@/components/mapa-lote";
 import { formatCOP } from "@/lib/format";
 
 type LoteDetalle = LoteMock & { propietario: Actor | null };
@@ -247,6 +248,14 @@ export default function LoteDetallePage({ slug }: { slug: string }) {
         </div>
 
         <aside className="flex flex-col gap-6 lg:sticky lg:top-24 lg:self-start">
+          {lote.latitud != null && lote.longitud != null && (
+            <MapaLote
+              latitud={lote.latitud}
+              longitud={lote.longitud}
+              nombre={lote.nombre}
+            />
+          )}
+
           <div className="flex flex-col gap-4 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5">
             <h2 className="text-sm font-medium uppercase tracking-wide text-[var(--muted)]">
               Resumen
